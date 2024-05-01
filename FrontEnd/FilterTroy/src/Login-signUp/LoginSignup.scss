@@ -1,3 +1,6 @@
+// body{
+//     overflow-x: hidden;
+// }
 
 .container {
     display: flex;
@@ -63,6 +66,31 @@
     font-size: 19px;
 }
 
+
+  
+.file-input {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 15px;
+    background-color: #FC8020;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px; /* Adjust spacing between button and file name */
+  }
+  .file-input input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  
 .forgot-password{
     padding-left: 62px;
     margin-top: 22px;

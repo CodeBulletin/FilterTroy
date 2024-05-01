@@ -7,9 +7,9 @@ import Login from './Login-signUp/LoginSignup'
 function App() {
   return (
     <div id="main">
-      {/* <Login /> */}
-      <Navbar />
-      <Filter />
+      <Login />
+      {/* <Navbar /> */}
+      {/* <Filter /> */}
     </div>
   )
 }
