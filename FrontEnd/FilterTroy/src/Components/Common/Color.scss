@@ -1,0 +1,35 @@
+/* Styles for the color picker container */
+.ColorContainer {
+  padding: 5px; /* Padding around the color picker */
+  background-color: #f8f9fa; /* Light grey background for visibility */
+  border-radius: 8px; /* Rounded corners for a smoother look */
+  border: 1px solid #ccc; /* Subtle border to contain the color picker */
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Centers the color picker horizontally */
+  align-items: center; /* Centers the color picker vertically */
+  margin: 10px 0; /* Vertical spacing for clarity */
+  box-sizing: border-box;
+
+  /* Styles for the color input itself */
+  input[type="color"] {
+    cursor: pointer; /* Pointer cursor to indicate it's clickable */
+    border: none; /* Removes the default border */
+    height: 40px; /* Height to make the color picker easier to interact with */
+    width: 100%; /* Full width to fill the container */
+    -webkit-appearance: none; /* Removes default styling for Safari */
+    appearance: none;
+    border-radius: 4px; /* Rounded corners for the color picker */
+    padding: 0; /* Reset padding */
+  }
+
+  /* Remove the default styling of the color picker for Chrome */
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0; /* Removes padding around the swatch */
+    border: none; /* Removes additional border if any */
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    border: none; /* Ensures no border around the color swatch */
+    border-radius: 4px; /* Rounded corners for the swatch */
+  }
+}

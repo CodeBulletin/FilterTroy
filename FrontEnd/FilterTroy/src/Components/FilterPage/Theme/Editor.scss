@@ -1,39 +1,46 @@
 .Editor {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 .EditorContainer {
-    width: 100%;
-    flex-grow: 1;
+  width: 100%;
+  flex-grow: 1;
 }
 
 .EditorHeader {
-    background-color: #FBF1D3;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    display: flex;
-    justify-content: space-between;
+  background-color: #fbf1d3;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .EditorTitle {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .EditorHeaderButtonContainer {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .EditorInfoContainer {
-    display: flex;
-    justify-content: space-between;
-    background-color: #FBF1D3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fbf1d3;
+  padding: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  .Select {
     padding: 0.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  }
+  .SelectContainer {
+    width: 50px;
+  }
 }
