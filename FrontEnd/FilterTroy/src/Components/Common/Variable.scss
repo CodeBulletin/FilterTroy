@@ -1,0 +1,15 @@
+.Variable {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-top: 1rem;
+  label {
+    width: 50%;
+    text-align: left;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  div {
+    width: 50%;
+  }
+}

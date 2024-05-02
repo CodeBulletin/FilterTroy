@@ -1,6 +1,60 @@
 .Navbar {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    position: sticky;
-    top: 0%;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  display: flex;
+  position: sticky;
+  top: 0%;
+  justify-content: space-between;
+  padding-right: 2rem;
+  background-color: #404040;
+}
+
+.NavbarTitle {
+  font-size: 2.25rem;
+  font-family: Lobster, Tahoma, Arial;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  text-decoration: none;
+  color: #fff;
+  &:active {
+    color: #fff;
+  }
+  &:visited {
+    color: #fff;
+  }
+  &:hover {
+    color: #fc8020;
+  }
+}
+
+.NavbarItems {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.NavbarLink {
+  font-family: Tahoma, Arial;
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  &:active {
+    color: #fff;
+  }
+  &:visited {
+    color: #fff;
+  }
+  &:hover {
+    color: #fc8020;
+  }
+}
+
+.SearchBar {
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+  }
 }

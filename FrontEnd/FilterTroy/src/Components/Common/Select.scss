@@ -1,0 +1,26 @@
+.SelectContainer {
+  width: 200px; /* Adjust the width as needed */
+  border: 2px solid #007bff; /* Blue border */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.Select {
+  width: 100%; /* Makes the select element fill the div */
+  padding: 8px; /* Adds space inside the select element */
+  border: none; /* No border for the select element */
+  background-color: #f8f9fa; /* Light grey background */
+  color: #333; /* Dark text for easy reading */
+  font-size: 16px; /* Larger font size for better readability */
+  border-radius: 5px; /* Rounded corners for the select element */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow below the select box */
+  -webkit-appearance: none; /* Removes default styling provided by the browser */
+  -moz-appearance: none; /* Removes default styling provided by the browser */
+  appearance: none; /* Removes default styling provided by the browser */
+}
+
+/* Style for the arrow icon inside the select element */
+.Select::-ms-expand {
+  display: none; /* Hides the default dropdown arrow in IE */
+}
+
+/* You can add a custom arrow icon using background-image if needed */

@@ -1,14 +1,14 @@
-import React from 'react'
-import FilterTabs from './FilterTabs'
-import './Theme/Filter.scss'
+import React from "react";
+import FilterTabs from "./FilterTabs";
+import "./Theme/Filter.scss";
 
 const Filter = () => {
   return (
-    <div className='filterMainArea'>
-      <div className='filterDetails'></div>
+    <div className="filterMainArea">
+      <div className="filterDetails"></div>
       <FilterTabs />
     </div>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;

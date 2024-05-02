@@ -1,0 +1,20 @@
+/* Styles for the container of the checkbox */
+.checkboxContainer {
+  display: flex; /* Uses flexbox to align the checkbox */
+  align-items: center; /* Centers the checkbox vertically */
+
+  /* Styles for the checkbox itself */
+  input[type="checkbox"] {
+    margin-right: 10px; /* Space between the checkbox and any label/text */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 20px; /* Width of the checkbox */
+    height: 20px; /* Height of the checkbox */
+    accent-color: #007bff; /* Change the accent color to blue for checked state */
+  }
+
+  /* Customize the appearance when the checkbox is checked */
+  input[type="checkbox"]:checked {
+    background-color: #007bff; /* Blue background when checked */
+    border-color: #0056b3; /* Darker blue border when checked */
+  }
+}
