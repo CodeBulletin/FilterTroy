@@ -1,13 +1,8 @@
 import "./App.scss";
 import Filter from "./Components/FilterPage/Filter";
 import Navbar from "./Components/NavBar/Navbar";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  BrowserRouter,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Login from "./Login-signUp/LoginSignup";
 
 function App() {
   return (
@@ -15,6 +10,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/filter" element={<Filter />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<div>Home</div>} />
       </Routes>
     </div>
