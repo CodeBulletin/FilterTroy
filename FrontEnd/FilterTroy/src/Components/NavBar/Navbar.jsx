@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Theme/Navbar.scss";
 
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../Redux/authSlice";
+
 const Navbar = () => {
+  const isLogged = useSelector((state) => state.auth.isLogged);
+  const dispatch = useDispatch();
   return (
     <div className="Navbar">
       <div className="NavbarItems">
@@ -20,9 +25,25 @@ const Navbar = () => {
         <Link className="NavbarLink" to="/Filter/New">
           New
         </Link>
-        <Link className="NavbarLink" to="/SignIn">
-          SignIn
-        </Link>
+        {isLogged ? (
+          <Link
+            className="NavbarLink"
+            to="/"
+            onClick={() => dispatch(logout())}
+          >
+            Logout
+          </Link>
+        ) : (
+          <Link
+            className="NavbarLink"
+            to="/Login"
+            onClick={() => {
+              useDispatch(logout());
+            }}
+          >
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

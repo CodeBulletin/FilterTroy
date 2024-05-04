@@ -17,8 +17,19 @@ const Editor = (props) => {
       <div className="EditorHeader">
         <div className="EditorTitle">{props.title}</div>
         <div className="EditorHeaderButtonContainer">
-          <button className="EditorButton">Save</button>
-          <button className="EditorButton">Run</button>
+          {props.onSave !== null && (
+            <button
+              className="EditorButton"
+              onClick={() => {
+                if (props.onSave !== null) props.onSave(props.code);
+              }}
+            >
+              Save
+            </button>
+          )}
+          {props.onRun !== null && (
+            <button className="EditorButton">Run</button>
+          )}
         </div>
       </div>
       <div className="EditorContainer">

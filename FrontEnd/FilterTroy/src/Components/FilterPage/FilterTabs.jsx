@@ -17,6 +17,17 @@ const FilterTabs = () => {
   const fontSize = useSelector((state) => state.filter.editorFontSize);
   const dispatch = useDispatch();
 
+  const onVariablesSave = (value) => {
+    console.log("saving variables");
+    const vars = JSON.parse(value);
+    const keys = Object.keys(vars);
+    const vals = keys.reduce((acc, key) => {
+      acc[key] = vars[key].value;
+      return acc;
+    }, {});
+    dispatch(setVariablesValues(vals));
+  };
+
   return (
     <Tabs.Root className="TabRoot" defaultValue="View">
       <Tabs.List aria-label="Filters" className="TabList">
@@ -43,6 +54,8 @@ const FilterTabs = () => {
             onChange={(value) => dispatch(setCode(value))}
             onFontSizeChange={(value) => dispatch(setEditorFontSize(value))}
             fontSize={fontSize}
+            onSave={null}
+            onRun={null}
             includeTime
           />
         </Tabs.Content>
@@ -54,6 +67,8 @@ const FilterTabs = () => {
             code={variables}
             onChange={(value) => dispatch(setVariables(value))}
             onFontSizeChange={(value) => dispatch(setEditorFontSize(value))}
+            onSave={onVariablesSave}
+            onRun={null}
             fontSize={fontSize}
           />
         </Tabs.Content>
