@@ -13,5 +13,5 @@ class User(BaseModel):
 
 class UserInDB(User):
     hashed_password: str
-    created_on: datetime
+    created_on: Optional[datetime] = None
     profile_pic: Optional[str] = None

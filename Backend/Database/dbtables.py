@@ -11,7 +11,8 @@ def create_tables(cursor):
     cursor.execute('''CREATE TABLE IF NOT EXISTS Filter (
     FilterID INT AUTO_INCREMENT NOT NULL,
     FilterName VARCHAR(50) NOT NULL,
-    CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Description VARCHAR(500) NOT NULL,
+    InitialOrientation INT NOT NULL,
     InputImagePath VARCHAR(255) NOT NULL,
     OutputImagePath VARCHAR(255) NOT NULL,
     PRIMARY KEY (FilterID)
@@ -19,6 +20,7 @@ def create_tables(cursor):
     cursor.execute('''CREATE TABLE IF NOT EXISTS UserFilter (
     UserName VARCHAR(255) NOT NULL,
     FilterID INT NOT NULL,
+    CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (UserName, FilterID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
     FOREIGN KEY (FilterID) REFERENCES Filter(FilterID)
@@ -73,6 +75,13 @@ def create_tables(cursor):
     PRIMARY KEY (UserName, ReplyID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
     FOREIGN KEY (ReplyID) REFERENCES Reply(ReplyID)
+);''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ClonedFrom (
+    FilterID INT NOT NULL,
+    ClonedFromFilterID INT NOT NULL,
+    PRIMARY KEY (FilterID, ClonedFromFilterID),
+    FOREIGN KEY (FilterID) REFERENCES Filter(FilterID),
+    FOREIGN KEY (ClonedFromFilterID) REFERENCES Filter(FilterID)
 );''')
 
 def tables_metadata(cursor):

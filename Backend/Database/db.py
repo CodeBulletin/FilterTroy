@@ -1,7 +1,7 @@
 import mysql.connector
 
-from dbtables import create_tables, tables_metadata
-
+from Database.dbtables import create_tables, tables_metadata
+from Database.dbviews import create_views, views_metadata
 
 def connect(host, user, password):
     return mysql.connector.connect(
@@ -24,19 +24,26 @@ def get_user(connection, username):
     return user
 
 def user_exists(connection, username):
-    return get_user(connection, username) is not None
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM Users WHERE LOWER(UserName) = LOWER(%s)", (username,))
+    user = cursor.fetchone()
+    cursor.close()
+    return user is not None
 
 def create_db(connection):
     cursor = connection.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS FilterTroy")
     cursor.execute("USE FilterTroy")
     create_tables(cursor)
+    create_views(cursor)
+    
     print("Database created / connected to FilterTroy")
     cursor.close()
 
 def show_db(connection):
     cursor = connection.cursor()
-    tables_metadata(cursor)
+    # tables_metadata(cursor)
+    views_metadata(cursor)
     cursor.close()
 
 def drop_db(connection):

@@ -1,26 +1,24 @@
 from fastapi import FastAPI, HTTPException, status, File, UploadFile, Form
 from fastapi.responses import FileResponse
-from db import connect, create_user, get_user, create_db, user_exists, show_db, connection
+from Database.db import connect, create_user, get_user, create_db, user_exists, show_db, connection
 from fastapi.middleware.cors import CORSMiddleware
 import cv2
 from ee import evaluate_filter
 import json
-from auth import router as auth_router
+from auth.auth import router as auth_router
+from filter.filter import router as filter_router
 import os
+from config import ORIGINS, EXPOSE_HEADERS
 
 app = FastAPI()
 
-# origins = [
-#     "http://localhost:5173",
-# ]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-User-Info", "Authorization"]
+    expose_headers=EXPOSE_HEADERS
 )
 
 create_db(connection)
@@ -35,28 +33,29 @@ for folder in folders:
 print("Folders created / already exist")
 
 app.include_router(auth_router, prefix="/auth")
+app.include_router(filter_router, prefix="/filter")
 
 
-@app.post("/filter", response_class=FileResponse)
-async def apply_filter(code: str = Form(...), vars: str = Form(...), image: UploadFile = File(...)):
-    content = await image.read()
-    # write the content to a file
-    with open("data.jpg", "wb") as f:
-        f.write(content)
+# @app.post("/filter", response_class=FileResponse)
+# async def apply_filter(code: str = Form(...), vars: str = Form(...), image: UploadFile = File(...)):
+#     content = await image.read()
+#     # write the content to a file
+#     with open("data.jpg", "wb") as f:
+#         f.write(content)
 
-    # read the image
-    img = cv2.imread("data.jpg")
+#     # read the image
+#     img = cv2.imread("data.jpg")
 
-    #convert the vars to a dict
-    variables = json.loads(vars)
+#     #convert the vars to a dict
+#     variables = json.loads(vars)
 
-    evaluated = evaluate_filter(code, img, variables)
+#     evaluated = evaluate_filter(code, img, variables)
 
-    print(evaluated, vars)
+#     print(evaluated, vars)
 
 
-    # print(evaluated)
-    # Save the image
-    cv2.imwrite("data.jpg", evaluated)
+#     # print(evaluated)
+#     # Save the image
+#     cv2.imwrite("data.jpg", evaluated)
 
-    return FileResponse("data.jpg", media_type="image/jpeg")
+#     return FileResponse("data.jpg", media_type="image/jpeg")

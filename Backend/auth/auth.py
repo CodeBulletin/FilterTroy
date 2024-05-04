@@ -5,9 +5,9 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from Models.users import User, UserInDB, UserLogin
 from Models.token import Token, TokenData
-from authUtils import authenticate_user, create_access_token, get_user, get_password_hash
+from auth.authUtils import authenticate_user, create_access_token, get_user, get_password_hash
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from db import connection, create_user as create_userdb, user_exists as user_existsdb
+from Database.db import connection, create_user as create_userdb, user_exists as user_existsdb, get_user as get_userdb
 from utils import getRandAlphaStr, validate_email, validate_username, low_res
 import os
 import json
@@ -16,7 +16,10 @@ router = APIRouter()
 
 @router.post("/token")
 async def login_for_access_token(UserLogin: UserLogin):
-    user = authenticate_user(connection, UserLogin.username, UserLogin.password)
+    try:
+        user = authenticate_user(connection, UserLogin.username, UserLogin.password)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     if not user:
         raise HTTPException(
@@ -50,33 +53,55 @@ async def login_for_access_token(UserLogin: UserLogin):
     }
 
     # Read the profile pic
-    with open(f"./Images/ProfilePics/{user.profile_pic}", "rb") as f:
-        profile_pic = f.read()
+    try:
+        with open(f"./Images/ProfilePics/{user.profile_pic}", "rb") as f:
+            profile_pic = f.read()
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     return Response(content=profile_pic, media_type="image/jpeg", headers=headers)
 
-# @router.get("/users/me", response_model=User)
-# async def read_users_me(token: str):
-#     credentials_exception = HTTPException(
-#         status_code=status.HTTP_401_UNAUTHORIZED,
-#         detail="Could not validate credentials",
-#         headers={"WWW-Authenticate": "Bearer"},
-#     )
-#     try:
-#         ttype, token = token.split()
-#         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-#         username: str = payload.get("sub")
-#         if username is None:
-#             raise credentials_exception
-#         token_data = TokenData(username=username)
-#     except JWTError:
-#         raise credentials_exception
-#     except Exception:
-#         raise credentials_exception
-#     user = get_user(connection, username=token_data.username)
-#     if user is None:
-#         raise credentials_exception
-#     return user
+@router.post("/user/me", response_model=str)
+async def read_users_me(token: str= Form(...)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        ttype, token = token.split()
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+        exp = payload.get("exp")
+        
+        if exp is None:
+            raise credentials_exception
+        
+        exp = datetime.fromtimestamp(exp)
+        if datetime.utcnow() > exp:
+            raise credentials_exception
+        
+        username = payload.get("username")
+        email = payload.get("email")
+
+        if username is None:
+            raise credentials_exception
+        
+        if email is None:
+            raise credentials_exception
+        
+        # Check if the user exists
+        user = get_userdb(connection, username)
+        if user is None:
+            raise credentials_exception
+        
+        if user["Email"] != email:
+            raise credentials_exception
+        
+        return "User authenticated successfully"
+        
+    except JWTError:
+        raise credentials_exception
 
 @router.post("/signup", response_model=str)
 async def create_user(file: UploadFile = File(...), username: str = Form(...), email: str = Form(...), password: str = Form(...)):
@@ -94,7 +119,12 @@ async def create_user(file: UploadFile = File(...), username: str = Form(...), e
         raise HTTPException(status_code=400, detail="Password must be at least 8 characters long")
     
     # Check if the username already exists
-    if user_existsdb(connection, username):
+    try:
+        exists = user_existsdb(connection, username)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    if exists:
         raise HTTPException(status_code=400, detail="Username already exists")
     
     # download the profile pic

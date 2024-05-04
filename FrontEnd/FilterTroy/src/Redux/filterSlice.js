@@ -6,6 +6,10 @@ const initState = {
   editorFontSize: 14,
   editorOrientation: "0",
   variablesValues: {},
+
+  openMode: "New", // New, Clone, View
+  filterId: null,
+  filteCloneId: null,
 };
 
 const filterSlice = createSlice({
@@ -27,6 +31,18 @@ const filterSlice = createSlice({
     setVariablesValues: (state, action) => {
       state.variablesValues = action.payload;
     },
+
+    setOpenMode: (state, action) => {
+      state.openMode = action.payload;
+    },
+
+    setFilterId: (state, action) => {
+      state.filterId = action.payload;
+    },
+
+    setFilterCloneId: (state, action) => {
+      state.filteCloneId = action.payload;
+    },
   },
 });
 
@@ -36,6 +52,9 @@ export const {
   setEditorFontSize,
   setEditorOrientation,
   setVariablesValues,
+  setOpenMode,
+  setFilterId,
+  setFilterCloneId,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

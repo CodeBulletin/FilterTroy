@@ -4,12 +4,11 @@ import bcrypt
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from Models.users import UserInDB
-from db import get_user as get_userdb
+from Database.db import get_user as get_userdb
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def dict_to_userinDB(user_dict):
-    print(user_dict)
     return UserInDB(username=user_dict["UserName"], email=user_dict["Email"], disabled=user_dict["Disabled"], hashed_password=user_dict["Hashed_Password"], profile_pic=user_dict["ProfilePicPath"], created_on=user_dict["CreatedOn"])
 
 def get_password_hash(password):

@@ -40,6 +40,9 @@ const FilterTabs = () => {
         <Tabs.Trigger value="Variables" className="TabTrigger">
           Variables
         </Tabs.Trigger>
+        <Tabs.Trigger value="Console" className="TabTrigger">
+          Console
+        </Tabs.Trigger>
       </Tabs.List>
       <div className="filterWindow">
         <Tabs.Content value="View" className="TabContent">
