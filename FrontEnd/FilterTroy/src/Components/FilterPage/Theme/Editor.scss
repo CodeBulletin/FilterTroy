@@ -44,3 +44,19 @@
     width: 50px;
   }
 }
+
+.EditorButton {
+  background-color: #fdf6e3; /* Base3 */
+  color: #586e75; /* Base01 */
+  border: 2px solid #eee8d5; /* Base2 */
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+
+  &:hover {
+    background-color: #eee8d5; /* Base2 */
+    color: #073642; /* Base03 */
+    border-color: #073642; /* Base03 */
+  }
+}

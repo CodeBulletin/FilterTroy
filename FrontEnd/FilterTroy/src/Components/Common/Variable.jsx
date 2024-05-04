@@ -21,7 +21,6 @@ const Variable = ({ id, label, type, dtype, val, other }) => {
       })
     );
   }, [value]);
-  console.log(variables);
   return (
     <div className="Variable">
       <label htmlFor={id}>{label}</label>
