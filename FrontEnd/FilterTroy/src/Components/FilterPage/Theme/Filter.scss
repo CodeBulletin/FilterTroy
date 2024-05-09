@@ -12,10 +12,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 1rem;
   padding-right: 0rem;
 }
 
@@ -24,4 +23,204 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
+  padding: 1rem;
+  box-sizing: border-box;
+  .inputView {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    .headerView {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding-bottom: 1rem;
+      input {
+        width: 80%;
+        color: black; /* Darker text for better readability */
+        border: 1px solid #eee8d5; /* Subtle border */
+        font-size: 1.25rem;
+        padding: 0.5rem;
+        background-color: #ffffff; /* Light background for the input */
+        outline: none; /* Removes the default focus outline */
+        box-sizing: border-box; /* Ensures the input size includes padding */
+        border-radius: 5px;
+        :focus {
+          border-color: var(
+            --blue
+          ); /* Highlight with Solarized blue on focus */
+          box-shadow: 0 0 8px rgba(38, 139, 210, 0.3); /* Soft glow effect for focus */
+        }
+      }
+      button {
+        background-color: #fdf6e3; /* Base3 */
+        color: #000; /* Base01 */
+        border: 2px solid #eee8d5; /* Base2 */
+        padding: 0.5rem;
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        font-size: 1.125rem;
+        cursor: pointer;
+        &:hover {
+          background-color: #eee8d5; /* Base2 */
+          color: #000; /* Base03 */
+          border-color: #073642; /* Base03 */
+        }
+      }
+    }
+    textarea {
+      width: 100%;
+      height: 100%;
+      color: black; /* Darker text for better readability */
+      border: 1px solid #eee8d5; /* Subtle border */
+      font-size: 1rem;
+      padding: 0.5rem;
+      background-color: #ffffff; /* Light background for the input */
+      outline: none; /* Removes the default focus outline */
+      box-sizing: border-box; /* Ensures the input size includes padding */
+      border-radius: 5px;
+      :focus {
+        border-color: var(--blue); /* Highlight with Solarized blue on focus */
+        box-shadow: 0 0 8px rgba(38, 139, 210, 0.3); /* Soft glow effect for focus */
+      }
+    }
+  }
+
+  .normalView {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    .normalViewHeader {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .filterName {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+      span {
+        font-weight: 600;
+      }
+    }
+    .viewDesc {
+      font-size: 1rem;
+      padding-top: 1rem;
+    }
+    .forkInfo {
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      .link {
+        color: #fc8020;
+        text-decoration: none;
+        padding-left: 0.5rem;
+        &:visited {
+          color: #fc8020;
+        }
+        &:hover {
+          color: #cc8890;
+        }
+      }
+      img {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+      }
+    }
+    .infoButtons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 1rem;
+      button {
+        cursor: pointer;
+        background-color: #0000;
+        outline: none;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        span {
+          font-weight: 600;
+          font-size: 0.875rem;
+        }
+        img {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+      }
+    }
+    .editButton {
+      background-color: #fdf6e3; /* Base3 */
+      color: #000; /* Base01 */
+      border: 2px solid #eee8d5; /* Base2 */
+      padding: 0.5rem;
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      border-radius: 5px;
+      font-size: 1.125rem;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 2rem;
+      cursor: pointer;
+      &:hover {
+        background-color: #eee8d5; /* Base2 */
+        color: #000; /* Base03 */
+        border-color: #073642; /* Base03 */
+      }
+    }
+
+    .saveButton {
+      margin: 0 !important;
+    }
+
+    textarea {
+      width: 100%;
+      flex-grow: 1;
+      color: black; /* Darker text for better readability */
+      border: 1px solid #eee8d5; /* Subtle border */
+      font-size: 1rem;
+      padding: 0.5rem;
+      background-color: #ffffff; /* Light background for the input */
+      outline: none; /* Removes the default focus outline */
+      box-sizing: border-box; /* Ensures the input size includes padding */
+      border-radius: 5px;
+      :focus {
+        border-color: var(--blue); /* Highlight with Solarized blue on focus */
+        box-shadow: 0 0 8px rgba(38, 139, 210, 0.3); /* Soft glow effect for focus */
+      }
+    }
+  }
+
+  .filterErrorDiv {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 1rem;
+    span {
+      font-size: 0.938rem;
+      font-weight: 600;
+      color: #dc322f;
+    }
+    svg {
+      width: 0.938rem;
+      height: 0.938rem;
+      color: #dc322f !important;
+    }
+  }
 }

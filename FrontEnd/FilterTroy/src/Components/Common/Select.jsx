@@ -1,5 +1,5 @@
 import React from "react";
-import "./Select.scss";
+import "./Theme/Select.scss";
 
 const SelectComp = (props) => {
   return (

@@ -5,3 +5,8 @@ ORIGINS = [
     "http://localhost:5173",
 ]
 EXPOSE_HEADERS = ["X-User-Info", "Authorization"]
+
+DB_HOST = "localhost"
+DB_USER = "root"
+DB_PASSWORD = "1234"
+DB_NAME = "FilterTroy"

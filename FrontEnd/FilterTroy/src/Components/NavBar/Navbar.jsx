@@ -17,11 +17,11 @@ const Navbar = () => {
         <Link to="/" className="NavbarTitle">
           FilterTroy
         </Link>
-        <div className="SearchBar">
-          <input type="text" placeholder="Search"></input>
-        </div>
       </div>
       <div className="NavbarItems">
+        <Link className="NavbarLink" to="/Filter/New">
+          Docs
+        </Link>
         <Link className="NavbarLink" to="/Browse">
           Browse
         </Link>
@@ -46,7 +46,7 @@ const Navbar = () => {
                     {auth.username.slice(0, 2).toUpperCase()}
                   </Avatar.Fallback>
                 </Avatar.Root>
-                <span>Profile</span>
+                <span>{auth.username}</span>
               </div>
             </Link>
           </>

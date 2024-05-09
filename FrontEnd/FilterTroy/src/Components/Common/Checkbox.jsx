@@ -1,5 +1,5 @@
 import React from "react";
-import "./Checkbox.scss";
+import "./Theme/Checkbox.scss";
 
 const Checkbox = (props) => {
   return (
@@ -8,9 +8,9 @@ const Checkbox = (props) => {
         type="checkbox"
         id={props.id}
         name={props.id}
-        value={props.value}
+        checked={props.value}
         onChange={(e) => {
-          props.onChange(e.target.value);
+          props.onChange(props.value);
         }}
       />
     </div>

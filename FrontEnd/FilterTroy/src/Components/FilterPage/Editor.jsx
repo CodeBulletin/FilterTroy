@@ -15,7 +15,10 @@ const Editor = (props) => {
   return (
     <div className="Editor">
       <div className="EditorHeader">
-        <div className="EditorTitle">{props.title}</div>
+        <div className="EditorTitle">
+          {props.title}
+          {`${props.readOnly ? " (Read Only)" : ""}`}
+        </div>
         <div className="EditorHeaderButtonContainer">
           {props.onSave !== null && (
             <button
@@ -52,6 +55,7 @@ const Editor = (props) => {
           }}
           fontSize={`${props.fontSize}px`}
           lineHeight={`${parseInt(props.fontSize) + 2}px`}
+          readOnly={props.readOnly}
         />
       </div>
       <div className="EditorInfoContainer">

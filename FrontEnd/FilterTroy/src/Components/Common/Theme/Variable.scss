@@ -3,13 +3,13 @@
   width: 100%;
   align-items: center;
   padding-top: 1rem;
-  label {
+  .varLabel {
     width: 50%;
     text-align: left;
     font-size: 1.25rem;
     font-weight: 500;
   }
-  div {
+  .outerContainer {
     width: 50%;
   }
 }

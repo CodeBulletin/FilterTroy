@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Text from "./Text";
 import Color from "./Color";
 import SelectComp from "./Select";
 import Checkbox from "./Checkbox";
 import Slider from "./Slider";
 
-import "./Variable.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { setVariablesValues } from "../../Redux/filterSlice";
+import "./Theme/Variable.scss";
 
-const Variable = ({ id, label, type, dtype, val, other }) => {
-  const dispatch = useDispatch();
-  const variables = useSelector((state) => state.filter.variablesValues);
-  const [value, setValue] = useState(variables[id] || val);
-  useEffect(() => {
-    dispatch(
-      setVariablesValues({
-        ...variables,
-        [id]: value,
-      })
-    );
-  }, [value]);
+const Variable = ({ id, label, type, dtype, val, other, value, setValue }) => {
   return (
     <div className="Variable">
-      <label htmlFor={id}>{label}</label>
-      <div>
+      <label htmlFor={id} className="varLabel">
+        {label}
+      </label>
+      <div className="outerContainer">
         {type == "text" ? (
           <Text id={id} type={dtype} value={value} onChange={setValue} />
         ) : type == "color" ? (
-          <Color id={id} value={value} onChange={setValue} />
+          <Color
+            id={id}
+            value={value == "" ? "#fff" : value}
+            onChange={setValue}
+          />
         ) : type == "select" ? (
           <SelectComp
             id={id}
@@ -37,11 +30,15 @@ const Variable = ({ id, label, type, dtype, val, other }) => {
             onChange={setValue}
           />
         ) : type == "checkbox" ? (
-          <Checkbox id={id} value={value} onChange={setValue} />
+          <Checkbox
+            id={id}
+            value={value == "" ? false : value}
+            onChange={setValue}
+          />
         ) : type == "slider" ? (
           <Slider
             id={id}
-            value={value}
+            value={value == "" ? "0" : value}
             onChange={setValue}
             min={other.min}
             max={other.max}

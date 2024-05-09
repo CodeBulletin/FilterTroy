@@ -1,7 +1,8 @@
-from Database.db import connection, drop_db
+from Database.db import connection, drop_db, truncate_table
 import os
 
-drop_db(connection)
+drop_db(conn := connection())
+conn.close()
 
 print("Database dropped")
 
@@ -11,3 +12,6 @@ folders = ["./Images/InputImages", "./Images/OutputImages", "./Images/ProfilePic
 for folder in folders:
     for file in os.listdir(folder):
         os.remove(f"{folder}/{file}")
+
+# tablename = "Users"
+# truncate_table(connection, tablename)

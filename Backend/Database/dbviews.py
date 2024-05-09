@@ -5,6 +5,11 @@ def create_views(cursor):
   FROM Filter f 
   JOIN FilterCode fc ON f.FilterID = fc.FilterID
   JOIN UserFilter uv ON f.FilterID = uv.FilterID;''')
+  cursor.execute('''CREATE OR REPLACE
+  VIEW UserFilterView AS
+  SELECT f.FilterID, f.FilterName, uv.CreatedOn, uv.UserName
+  FROM Filter f
+  JOIN UserFilter uv ON f.FilterID = uv.FilterID;''')
 
 def views_metadata(cursor):
   views= ["FilterView"]

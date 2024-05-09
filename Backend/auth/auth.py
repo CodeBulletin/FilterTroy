@@ -5,7 +5,7 @@ from jose import JWTError, jwt
 from datetime import datetime, timedelta
 from Models.users import User, UserInDB, UserLogin
 from Models.token import Token, TokenData
-from auth.authUtils import authenticate_user, create_access_token, get_user, get_password_hash
+from auth.authUtils import authenticate_user, create_access_token, get_user, get_password_hash, auth_token
 from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from Database.db import connection, create_user as create_userdb, user_exists as user_existsdb, get_user as get_userdb
 from utils import getRandAlphaStr, validate_email, validate_username, low_res
@@ -16,8 +16,10 @@ router = APIRouter()
 
 @router.post("/token")
 async def login_for_access_token(UserLogin: UserLogin):
+    conn = connection()
     try:
-        user = authenticate_user(connection, UserLogin.username, UserLogin.password)
+        user = authenticate_user(conn, UserLogin.username, UserLogin.password)
+        conn.close()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -58,6 +60,7 @@ async def login_for_access_token(UserLogin: UserLogin):
             profile_pic = f.read()
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
 
     return Response(content=profile_pic, media_type="image/jpeg", headers=headers)
 
@@ -69,42 +72,22 @@ async def read_users_me(token: str= Form(...)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        ttype, token = token.split()
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        conn = connection()
+        res = auth_token(token, SECRET_KEY, ALGORITHM, conn)
+        conn.close()
 
-        exp = payload.get("exp")
-        
-        if exp is None:
+        if not res:
             raise credentials_exception
         
-        exp = datetime.fromtimestamp(exp)
-        if datetime.utcnow() > exp:
-            raise credentials_exception
-        
-        username = payload.get("username")
-        email = payload.get("email")
-
-        if username is None:
-            raise credentials_exception
-        
-        if email is None:
-            raise credentials_exception
-        
-        # Check if the user exists
-        user = get_userdb(connection, username)
-        if user is None:
-            raise credentials_exception
-        
-        if user["Email"] != email:
-            raise credentials_exception
-        
-        return "User authenticated successfully"
+        return "User authenticated"
         
     except JWTError:
         raise credentials_exception
 
 @router.post("/signup", response_model=str)
 async def create_user(file: UploadFile = File(...), username: str = Form(...), email: str = Form(...), password: str = Form(...)):
+
+    conn = connection()
         
     # Validate the username
     if not validate_username(username):
@@ -120,7 +103,7 @@ async def create_user(file: UploadFile = File(...), username: str = Form(...), e
     
     # Check if the username already exists
     try:
-        exists = user_existsdb(connection, username)
+        exists = user_existsdb(conn, username)
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -150,7 +133,8 @@ async def create_user(file: UploadFile = File(...), username: str = Form(...), e
 
     # Insert the user into the database
     try:
-        create_userdb(connection, new_user.username, new_user.email, profile_pic, new_user.hashed_password)
+        create_userdb(conn, new_user.username, new_user.email, profile_pic, new_user.hashed_password)
+        conn.close()
     except Exception as e:
         # Delete the profile pic if an error occurs
         os.remove(f"./Images/ProfilePics/{profile_pic}")

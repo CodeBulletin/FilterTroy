@@ -3,11 +3,14 @@ import mysql.connector
 from Database.dbtables import create_tables, tables_metadata
 from Database.dbviews import create_views, views_metadata
 
-def connect(host, user, password):
+from config import DB_HOST, DB_USER, DB_PASSWORD, DB_NAME
+
+def connection():
     return mysql.connector.connect(
-        host=host,
-        user=user,
-        password=password
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD,
+        database=DB_NAME
     )
 
 def create_user(connection, username, email, profilepicpath, hash_password):
@@ -30,7 +33,12 @@ def user_exists(connection, username):
     cursor.close()
     return user is not None
 
-def create_db(connection):
+def create_db():
+    connection = mysql.connector.connect(
+        host=DB_HOST,
+        user=DB_USER,
+        password=DB_PASSWORD
+    )
     cursor = connection.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS FilterTroy")
     cursor.execute("USE FilterTroy")
@@ -39,6 +47,7 @@ def create_db(connection):
     
     print("Database created / connected to FilterTroy")
     cursor.close()
+    connection.close()
 
 def show_db(connection):
     cursor = connection.cursor()
@@ -51,5 +60,7 @@ def drop_db(connection):
     cursor.execute("DROP DATABASE IF EXISTS FilterTroy")
     cursor.close()
 
-
-connection = connect("localhost", "root", "1234")
+def truncate_table(connection, table_name):
+    cursor = connection.cursor()
+    cursor.execute(f"TRUNCATE TABLE {table_name}")
+    cursor.close()

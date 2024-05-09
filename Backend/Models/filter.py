@@ -2,14 +2,14 @@ from pydantic import BaseModel
 from typing import Optional
 
 class FilterFromDB(BaseModel):
-    filter_id: int
+    filter_id: str
     filter_name: str
     filter_desc: str
     created_on: str
     user_name: str
     filter_vars: str
     filter_code: str
-    intial_orientation: Optional[int] = None
+    initial_orientation: Optional[int] = None
     input_image_path: Optional[str] = None
     output_image_path: Optional[str] = None
 

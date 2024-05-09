@@ -41,3 +41,42 @@ def create_access_token(data: dict, SECRET_KEY: str, ALGORITHM: str, expires_del
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+def auth_token(token: str, SECRET_KEY: str, ALGORITHM: str, connection):
+    try:
+        ttype, token = token.split()
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+        exp = payload.get("exp")
+        
+        if exp is None:
+            return False
+        
+        exp = datetime.fromtimestamp(exp)
+        if datetime.utcnow() > exp:
+            return False
+        
+        username = payload.get("username")
+        email = payload.get("email")
+
+        if username is None:
+            return False
+        
+        if email is None:
+            return False
+        
+        # Check if the user exists
+        user = get_userdb(connection, username)
+        if user is None:
+            return False
+        
+        if user["Email"] != email:
+            return False
+
+        return {
+            "username": username,
+            "email": email
+        }
+        
+    except JWTError:
+        return False

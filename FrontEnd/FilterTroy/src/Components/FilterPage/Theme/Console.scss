@@ -1,0 +1,52 @@
+.consoleContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbf1d3;
+  padding: 1rem;
+  box-sizing: border-box;
+  .errorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0.5rem;
+    background-color: #fdf6e3;
+    border-radius: 5px;
+    flex-grow: 1;
+    height: 100%;
+    font-weight: 600;
+    box-sizing: border-box;
+    position: relative;
+
+    .clearButton {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      z-index: 5;
+      background-color: #fdf6e3; /* Base3 */
+      color: #000; /* Base01 */
+      border: 2px solid #eee8d5; /* Base2 */
+      padding: 0.5rem;
+      height: fit-content;
+      border-radius: 5px;
+      font-size: "0.938rem";
+      cursor: pointer;
+      &:hover {
+        background-color: #eee8d5; /* Base2 */
+        color: #000; /* Base03 */
+        border-color: #073642; /* Base03 */
+      }
+    }
+  }
+  .errorHeader {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .errorBody {
+    color: #dc322f;
+  }
+}

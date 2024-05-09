@@ -132,3 +132,11 @@ export const arraybufferToBase64 = (buffer) => {
 export const arraybufferToString = (buffer) => {
   return Buffer.from(buffer).toString();
 };
+
+export const strtojson = (str) => {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    return null;
+  }
+};
