@@ -1,0 +1,22 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  --spinner-size: 120px; /* Default size */
+  --spinner-thickness: 8px; /* Default width */
+  --spinner-border-color: #eee8d5; /* Solarized Light base2 */
+  --spinner-highlight-color: #268bd2; /* Solarized Light blue */
+
+  border: var(--spinner-thickness) solid var(--spinner-border-color);
+  border-top: var(--spinner-thickness) solid var(--spinner-highlight-color);
+  border-radius: 50%;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  animation: spin 2s linear infinite;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Slider.scss";
+import "./Theme/Slider.scss";
 
 const Slider = (props) => {
   return (

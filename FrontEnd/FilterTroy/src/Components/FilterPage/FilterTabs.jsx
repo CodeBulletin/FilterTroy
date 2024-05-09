@@ -4,28 +4,25 @@ import "./Theme/FilterTabs.scss";
 import Editor from "./Editor";
 import FilterView from "./FilterView";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCode,
-  setVariables,
-  setEditorFontSize,
-  setVariablesValues,
-} from "../../Redux/filterSlice";
+import { setCode, setVariables } from "../../Redux/filterSlice";
+import { setVariablesValue, setEditorFontSize } from "../../Redux/localSlice";
+import Console from "./Console";
 
-const FilterTabs = () => {
+const FilterTabs = ({ mode, handleApply }) => {
   const code = useSelector((state) => state.filter.code);
   const variables = useSelector((state) => state.filter.variables);
-  const fontSize = useSelector((state) => state.filter.editorFontSize);
+  const fontSize = useSelector((state) => state.local.editorFontSize);
+  const consoleError = useSelector((state) => state.filter.consoleError);
   const dispatch = useDispatch();
 
   const onVariablesSave = (value) => {
-    console.log("saving variables");
     const vars = JSON.parse(value);
     const keys = Object.keys(vars);
     const vals = keys.reduce((acc, key) => {
       acc[key] = vars[key].value;
       return acc;
     }, {});
-    dispatch(setVariablesValues(vals));
+    dispatch(setVariablesValue(vals));
   };
 
   return (
@@ -40,10 +37,17 @@ const FilterTabs = () => {
         <Tabs.Trigger value="Variables" className="TabTrigger">
           Variables
         </Tabs.Trigger>
+        <Tabs.Trigger value="Console" className="TabTrigger">
+          Console{" "}
+          {consoleError !== null && <span className="errorBadge">!</span>}
+        </Tabs.Trigger>
       </Tabs.List>
       <div className="filterWindow">
+        <Tabs.Content value="Console" className="TabContent">
+          <Console />
+        </Tabs.Content>
         <Tabs.Content value="View" className="TabContent">
-          <FilterView />
+          <FilterView handleApply={handleApply} />
         </Tabs.Content>
         <Tabs.Content value="Code" className="TabContent">
           <Editor
@@ -56,7 +60,7 @@ const FilterTabs = () => {
             fontSize={fontSize}
             onSave={null}
             onRun={null}
-            includeTime
+            readOnly={mode === "View"}
           />
         </Tabs.Content>
         <Tabs.Content value="Variables" className="TabContent">
@@ -69,6 +73,7 @@ const FilterTabs = () => {
             onFontSizeChange={(value) => dispatch(setEditorFontSize(value))}
             onSave={onVariablesSave}
             onRun={null}
+            readOnly={mode === "View"}
             fontSize={fontSize}
           />
         </Tabs.Content>

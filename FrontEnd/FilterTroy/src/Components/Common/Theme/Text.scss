@@ -12,6 +12,7 @@
   border: 1px solid #eee8d5; /* Subtle border */
   border-radius: 4px; /* Rounded corners for the input field */
   outline: none; /* Removes the default focus outline */
+  box-sizing: border-box; /* Ensures the input size includes padding */
 }
 
 .TextContainer input[type="text"]:focus,

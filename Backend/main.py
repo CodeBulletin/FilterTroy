@@ -1,30 +1,29 @@
-from fastapi import FastAPI, HTTPException, status, File, UploadFile, Form
-from fastapi.responses import FileResponse
-from db import connect, create_user, get_user, create_db, user_exists, show_db, connection
+from fastapi import FastAPI, Form, HTTPException
+from Database.db import create_db
 from fastapi.middleware.cors import CORSMiddleware
-import cv2
-from ee import evaluate_filter
-import json
-from auth import router as auth_router
+from evaluate_filter import evaluate_filter
+from auth.auth import router as auth_router
+from filter.filter import router as filter_router
 import os
+import cv2
+import base64
+import json
+import numpy as np
+from config import ORIGINS, EXPOSE_HEADERS
+from utils import base64_to_image_png
 
 app = FastAPI()
 
-# origins = [
-#     "http://localhost:5173",
-# ]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["X-User-Info", "Authorization"]
+    expose_headers=EXPOSE_HEADERS
 )
 
-create_db(connection)
-show_db(connection)
+create_db()
 
 # Create the following Folders if they don't exist already /Images/InputImages, /Images/OutputImages, /Images/ProfilePics, /Images/Temps
 folders = ["./Images/InputImages", "./Images/OutputImages", "./Images/ProfilePics", "./Images/Temps"]
@@ -35,28 +34,53 @@ for folder in folders:
 print("Folders created / already exist")
 
 app.include_router(auth_router, prefix="/auth")
+app.include_router(filter_router, prefix="/filter")
 
+import time
 
-@app.post("/filter", response_class=FileResponse)
-async def apply_filter(code: str = Form(...), vars: str = Form(...), image: UploadFile = File(...)):
-    content = await image.read()
-    # write the content to a file
-    with open("data.jpg", "wb") as f:
-        f.write(content)
+@app.post("/apply")
+async def apply_filter(code: str = Form(...), vars: str = Form(...), image: str = Form()):
 
-    # read the image
-    img = cv2.imread("data.jpg")
+    print(vars)
 
-    #convert the vars to a dict
+    img = base64_to_image_png(image)
+
+    # Conver PIL image to cv2 image
+    img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
+ 
+    # convert the vars to a dict
     variables = json.loads(vars)
 
-    evaluated = evaluate_filter(code, img, variables)
+    # Evaluate the filter
+    evaluated, err = evaluate_filter(code, img, variables)
 
-    print(evaluated, vars)
+    if err:
+        raise HTTPException(status_code=400, detail=err)
 
+    # Convert the image back to Base64
+    _, img_encoded = cv2.imencode(".jpg", evaluated)
 
-    # print(evaluated)
-    # Save the image
-    cv2.imwrite("data.jpg", evaluated)
+    img_base64 = base64.b64encode(img_encoded).decode()
 
-    return FileResponse("data.jpg", media_type="image/jpeg")
+    time.sleep(1)
+    
+    return "data:image/jpeg;base64," + img_base64
+    # content = await image.read()
+    # # write the content to a file
+    # with open("data.jpg", "wb") as f:
+    #     f.write(content)
+
+    # # read the image
+    # img = cv2.imread("data.jpg")
+
+    # #convert the vars to a dict
+    # variables = json.loads(vars)
+
+    # evaluated = evaluate_filter(code, img, variables)
+
+    # _, img_encoded = cv2.imencode(".jpg", evaluated)
+
+    # img_base64 = base64.b64encode(img_encoded).decode()
+    # img = f"data:image/jpeg;base64,{img_base64}"
+
+    # return img

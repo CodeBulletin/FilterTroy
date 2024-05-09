@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import filterReducer from "./filterSlice";
+import { localSlice, localSliceNoPresist } from "./localSlice";
 import authReducer from "./authSlice";
 import {
   persistStore,
@@ -14,17 +15,29 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-const persistConfig = {
-  key: "root",
+const persistAuthConfig = {
+  key: "auth",
   version: 1,
   storage,
 };
 
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+const persistLocalConfig = {
+  key: "local",
+  version: 1,
+  storage,
+};
+
+const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
+const persistedLocalReducer = persistReducer(
+  persistLocalConfig,
+  localSlice.reducer
+);
 
 const reducer = combineReducers({
   filter: filterReducer,
   auth: persistedAuthReducer,
+  local: persistedLocalReducer,
+  localNoPresist: localSliceNoPresist.reducer,
 });
 
 const store = configureStore({

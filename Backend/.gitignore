@@ -1,3 +1,6 @@
 .venv/
 Images/
 __pycache__/
+Database/__pycache__/
+Models/__pycache__/
+auth/__pycache__/

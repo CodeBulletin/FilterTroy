@@ -10,7 +10,7 @@ import {
 
 import * as Tabs from "@radix-ui/react-tabs";
 
-import { signup_fn, login_fn } from "../Redux/authSlice";
+import { signup_fn, login_fn } from "../../Redux/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";

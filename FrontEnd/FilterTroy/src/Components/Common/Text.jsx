@@ -1,5 +1,5 @@
 import React from "react";
-import "./Text.scss";
+import "./Theme/Text.scss";
 
 const Text = (props) => {
   return (

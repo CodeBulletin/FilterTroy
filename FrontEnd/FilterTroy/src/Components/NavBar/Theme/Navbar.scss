@@ -49,12 +49,28 @@
   }
 }
 
-.SearchBar {
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 0.5rem;
-    font-size: 1rem;
+.NavbarProfile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  .NavbarProfileImage {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    .Image {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    .Fallback {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #000;
+    }
   }
 }

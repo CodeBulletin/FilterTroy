@@ -9,22 +9,24 @@ def create_tables(cursor):
     PRIMARY KEY (UserName)
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS Filter (
-    FilterID INT AUTO_INCREMENT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
     FilterName VARCHAR(50) NOT NULL,
-    CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Description VARCHAR(500) NOT NULL,
+    InitialOrientation INT NOT NULL,
     InputImagePath VARCHAR(255) NOT NULL,
     OutputImagePath VARCHAR(255) NOT NULL,
     PRIMARY KEY (FilterID)
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS UserFilter (
     UserName VARCHAR(255) NOT NULL,
-    FilterID INT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
+    CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (UserName, FilterID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
     FOREIGN KEY (FilterID) REFERENCES Filter(FilterID)
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS FilterCode (
-    FilterID INT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
     Code LONGTEXT,
     Variables JSON,
     PRIMARY KEY (FilterID),
@@ -32,7 +34,7 @@ def create_tables(cursor):
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS UserLikedFilter (
     UserName VARCHAR(50) NOT NULL,
-    FilterID INT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
     LikedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (UserName, FilterID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
@@ -40,7 +42,7 @@ def create_tables(cursor):
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS UserSavedFilter (
     UserName VARCHAR(50) NOT NULL,
-    FilterID INT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
     SavedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (UserName, FilterID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
@@ -50,7 +52,7 @@ def create_tables(cursor):
     CommentID INT AUTO_INCREMENT PRIMARY KEY,
     CreatedOn DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Comment VARCHAR(500) NOT NULL,
-    FilterID INT NOT NULL,
+    FilterID VARCHAR(7) NOT NULL,
     FOREIGN KEY (FilterID) REFERENCES Filter(FilterID)
 );''')
     cursor.execute('''CREATE TABLE IF NOT EXISTS UserComment (
@@ -73,6 +75,13 @@ def create_tables(cursor):
     PRIMARY KEY (UserName, ReplyID),
     FOREIGN KEY (UserName) REFERENCES Users(UserName),
     FOREIGN KEY (ReplyID) REFERENCES Reply(ReplyID)
+);''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ClonedFrom (
+    FilterID VARCHAR(7) NOT NULL,
+    ClonedFromFilterID VARCHAR(7) NOT NULL,
+    PRIMARY KEY (FilterID, ClonedFromFilterID),
+    FOREIGN KEY (FilterID) REFERENCES Filter(FilterID),
+    FOREIGN KEY (ClonedFromFilterID) REFERENCES Filter(FilterID)
 );''')
 
 def tables_metadata(cursor):

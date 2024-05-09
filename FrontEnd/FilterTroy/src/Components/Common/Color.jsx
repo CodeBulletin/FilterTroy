@@ -1,5 +1,5 @@
 import React from "react";
-import "./Color.scss";
+import "./Theme/Color.scss";
 
 const Color = (props) => {
   return (
