@@ -256,6 +256,7 @@ const FilterDisplay = ({
               overflow: "hidden",
               textOverflow: "ellipsis",
               whiteSpace: "nowrap",
+              textAlign: "right",
             }}
           >
             by <b>{filter.user_name}</b>

@@ -1,7 +1,7 @@
 from typing import Optional
 from fastapi import APIRouter, HTTPException, status, FastAPI, Form
 from Database.db import connection
-from Database.browsedb import getFilters as getFiltersDB, getSavedFilters, getMyFilters, getTop4Liked
+from Database.browsedb import getFilters as getFiltersDB, getSavedFilters, getMyFilters, getTopLiked
 from Models.browse import BrowseFilter
 from auth.auth import auth_token
 from config import SECRET_KEY, ALGORITHM
@@ -55,7 +55,7 @@ async def saved(token: str = Form(...)):
 async def top():
     try: 
         conn = connection()
-        filters = getTop4Liked(conn.cursor())
+        filters = getTopLiked(conn.cursor())
         conn.close()
         return [filter[0] for filter in filters]
     except Exception as e:

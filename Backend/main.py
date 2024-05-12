@@ -6,6 +6,7 @@ from auth.auth import router as auth_router
 from filter.filter import router as filter_router
 from browse.browse import router as browse_router
 from comment.comment import router as comment_router
+from fastapi.staticfiles import StaticFiles
 import os
 import cv2
 import base64
@@ -39,6 +40,8 @@ app.include_router(auth_router, prefix="/auth")
 app.include_router(filter_router, prefix="/filter")
 app.include_router(browse_router, prefix="/browse")
 app.include_router(comment_router, prefix="/comment")
+
+app.mount("/doc", StaticFiles(directory="./Documentation", html=True), name="Doc")
 
 @app.post("/apply")
 async def apply_filter(code: str = Form(...), vars: str = Form(...), image: str = Form()):

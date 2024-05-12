@@ -6,6 +6,7 @@ import Login from "./Components/Login-signUp/LoginSignup";
 import Browse from "./Components/Browse/Browse";
 import NotFoundPage from "./Components/Common/notfound";
 import Profile from "./Components/Profile/Profile";
+import HomePage from "./Components/HomePage/HomePage";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/browse" element={<Browse />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

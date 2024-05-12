@@ -1,0 +1,33 @@
+.largeButton {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 20px;
+  background-color: #fc8020;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 150px;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  &:active {
+    transform: translateY(-0px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .svgIcon {
+    margin-left: 10px;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+}

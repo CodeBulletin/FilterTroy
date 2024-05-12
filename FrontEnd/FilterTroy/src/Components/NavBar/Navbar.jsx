@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="NavbarItems">
-        <Link className="NavbarLink" to="/Filter/New">
+        <Link className="NavbarLink" to="http://localhost:8000/doc/">
           Docs
         </Link>
         <Link className="NavbarLink" to="/Browse">

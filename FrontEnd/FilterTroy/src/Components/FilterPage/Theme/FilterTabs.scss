@@ -72,4 +72,6 @@
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }

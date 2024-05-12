@@ -61,7 +61,7 @@ LEFT JOIN (
   GROUP BY fd
   ) AS TableLike
   ON TableLike.fd = Filter.FilterID
-ORDER BY LikeCount DESC LIMIT 4
+ORDER BY LikeCount DESC LIMIT 5
 '''
 
 def create_views(cursor):
@@ -78,6 +78,14 @@ def create_views(cursor):
   JOIN UserFilter uv ON f.FilterID = uv.FilterID;''')
   cursor.execute(browse_view)
   cursor.execute(browse_top_view)
+  cursor.execute('''CREATE OR REPLACE VIEW CommentView AS
+  SELECT Comment.CommentID, Comment.Comment, Comment.CreatedOn, UserComment.UserName, Users.ProfilePicPath, Comment.FilterID FROM Comment
+  JOIN UserComment ON Comment.CommentID = UserComment.CommentID
+  JOIN Users ON UserComment.UserName = Users.UserName ORDER BY Comment.CreatedOn DESC;''')
+  cursor.execute('''CREATE OR REPLACE VIEW ReplyView AS
+  SELECT Reply.ReplyID, Reply.Reply, Reply.CreatedOn, UserReply.UserName, Users.ProfilePicPath, Reply.CommentID FROM Reply
+  JOIN UserReply ON UserReply.ReplyID = Reply.ReplyID
+  JOIN Users ON UserReply.UserName = Users.UserName ORDER BY Reply.CreatedOn DESC;''')
 
 def views_metadata(cursor):
   views= ["FilterView"]

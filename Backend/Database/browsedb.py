@@ -47,6 +47,6 @@ def getMyFilters(cursor, userID):
     cursor.execute("SELECT FilterID FROM UserFilter WHERE UserName = %s", (userID,))
     return cursor.fetchall()
 
-def getTop4Liked(cursor):
+def getTopLiked(cursor):
     cursor.execute("SELECT FilterID FROM BrowseTopView")
     return cursor.fetchall()
