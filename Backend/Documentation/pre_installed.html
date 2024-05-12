@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Include highlight.js from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <title>FilterTroy Documentation</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div>
+        <div id="open-nav-btn" class="ham-nav-arrow-btn show">
+          <i class="far fa-arrow-alt-circle-right arrow"></i>
+        </div>
+        <div id="close-nav-btn" class="ham-nav-arrow-btn hide">
+          <i class="far fa-arrow-alt-circle-left arrow"></i>
+        </div>
+      </div>
+      <div class="navigation">
+        <nav id="navbar">
+          <header id="navbar-header">
+            <div>
+              <span>FilterTroy</span>
+            </div>
+          </header>
+          <ul class="nav-list nobullets">
+            <li>
+              <a class="nav-link notextdec link-grey" href="./index.html"
+                >Introduction
+              </a>
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./code_input.html"
+                >Code Input</a
+              >
+            </li>
+            <li>
+              <a class="nav-link notextdec link-grey" href="#"
+                >3. Pre-Imported Libraries</a
+              >
+              <ul class="sublist">
+                <li>
+                  3.1<a class="notextdec link-grey" href="#overview">
+                    Overview</a
+                  >
+                </li>
+                <li>
+                  3.2<a
+                    class="notextdec link-grey"
+                    href="#Pre-Imported_Libraries"
+                  >
+                    Pre-Imported Libraries</a
+                  >
+                </li>
+                <li>
+                  3.3<a class="notextdec link-grey" href="#Example_Usage">
+                    Example Usage</a
+                  >
+                </li>
+                <li>
+                  3.4<a class="notextdec link-grey" href="#Conclusion">
+                    Conclusion</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./variable.html"
+                >Variable Definitions
+              </a>
+            </li>
+            <li>
+              <a class="nav-link notextdec link-grey" href="./references.html"
+                >References and Resources</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="http://localhost:5173/"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main id="main-doc">
+        <section class="main-section" id="overview">
+          <header>Overview</header>
+          <article>
+            <p>
+              To streamline the development of custom filters on Filter Troy, we
+              provide several commonly used Python libraries pre-imported in the
+              environment. This convenience eliminates the need for users to
+              include standard import statements in their filter code, allowing
+              them to focus on implementing the filter logic directly.
+            </p>
+          </article>
+        </section>
+
+        <section class="main-section" id="Pre-Imported_Libraries">
+          <header>Pre-Imported Libraries</header>
+          <article>
+            <p>
+              The following libraries are available by default in the Filter
+              Troy coding environment:
+            </p>
+            <ol>
+              <li>
+                <b>NumPy (np)</b>
+                <ul>
+                  <li>
+                    <b>Usage: </b>NumPy is fundamental for scientific computing
+                    with Python. It provides support for large,
+                    multi-dimensional arrays and matrices, along with a large
+                    collection of high-level mathematical functions to operate
+                    on these arrays.
+                  </li>
+                  <li>
+                    <b>Alias: </b><span style="background: #f0f0f0">np</span>
+                  </li>
+                  <li>
+                    <b>Documentation: </b
+                    ><a
+                      href="https://numpy.org/doc/"
+                      style="text-decoration: none; color: blue"
+                      >NumPy Documentation</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>OpenCV (cv2)</b>
+                <ul>
+                  <li>
+                    <b>Usage: </b>OpenCV is an open-source computer vision and
+                    machine learning software library. It is useful for a wide
+                    range of applications such as face recognition, motion
+                    tracking, and image manipulation.
+                  </li>
+                  <li>
+                    <b>Alias: </b><span style="background: #f0f0f0">cv2</span>
+                  </li>
+                  <li>
+                    <b>Documentation: </b
+                    ><a
+                      href="https://docs.opencv.org/master/"
+                      style="text-decoration: none; color: blue"
+                      >OpenCv Documentation</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Pillow (Image from PIL)</b>
+                <ul>
+                  <li>
+                    <b>Usage: </b>Pillow is the Python Imaging Library (PIL)
+                    fork, providing capabilities for opening, manipulating, and
+                    saving many different image file formats.
+                  </li>
+                  <li>
+                    <b>Alias: </b>Directly available via
+                    <span style="background: #f0f0f0">Image</span> from the
+                    <span style="background: #f0f0f0">PIL</span> module.
+                  </li>
+                  <li>
+                    <b>Documentation: </b
+                    ><a
+                      href="https://pillow.readthedocs.io/en/stable/"
+                      style="text-decoration: none; color: blue"
+                      >Pillow Documentation</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Scikit-image (ski)</b>
+                <ul>
+                  <li>
+                    <b>Usage: </b>Scikit-image is a collection of algorithms for
+                    image processing in Python. It is built on top of SciPy and
+                    is designed to work with NumPy arrays, providing a
+                    comprehensive set of image processing functions.
+                  </li>
+                  <li>
+                    <b>Alias: </b><span style="background: #f0f0f0">ski</span>
+                  </li>
+                  <li>
+                    <b>Documentation: </b
+                    ><a
+                      href="https://scikit-image.org/docs/stable/"
+                      style="text-decoration: none; color: blue"
+                      >Scikit-image Documentation</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="main-section" id="Example_Usage">
+          <header>Example Usage</header>
+          <article>
+            <p>
+              Since these libraries are already imported, you can use them
+              directly in your filter functions. Here’s a simple example
+              demonstrating how to use these libraries in a filter:
+            </p>
+            <pre><code  class="python">from typing import Dict
+
+def filter(image: np.ndarray, variables: Dict[str, str]) -> np.ndarray:
+    # Convert image to grayscale using OpenCV
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Perform a Gaussian blur using Scikit-image
+    blurred_image = ski.filters.gaussian(
+    gray_image, sigma=float(variables["blur_sigma"]))
+
+    # Convert the numpy array to a PIL Image, apply enhancement, and convert back
+    pil_image = Image.fromarray((blurred_image * 255).astype(np.uint8))
+
+    return gray_image</code></pre>
+
+            <p>
+              In this example,<b style="background: #f0f0f0"
+                >variables["blur_sigma"]</b
+              >
+              is expected to be a string that can be converted to a float,
+              representing the sigma value for the Gaussian blur.
+            </p>
+          </article>
+        </section>
+
+        <section class="main-section" id="Conclusion">
+          <header>Conclusion</header>
+          <article>
+            <p>
+              By providing these libraries, Filter Troy aims to reduce setup
+              overhead and make it easier for users to focus on creating and
+              customizing image filters. Enjoy the ease of using these powerful
+              tools in your filter development!
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

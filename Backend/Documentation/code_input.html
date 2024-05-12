@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Include highlight.js from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <title>FilterTroy Documentation</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div>
+        <div id="open-nav-btn" class="ham-nav-arrow-btn show">
+          <i class="far fa-arrow-alt-circle-right arrow"></i>
+        </div>
+        <div id="close-nav-btn" class="ham-nav-arrow-btn hide">
+          <i class="far fa-arrow-alt-circle-left arrow"></i>
+        </div>
+      </div>
+      <div class="navigation">
+        <nav id="navbar">
+          <header id="navbar-header">
+            <div>
+              <span>FilterTroy</span>
+            </div>
+          </header>
+          <ul class="nav-list nobullets">
+            <li>
+              <a class="nav-link notextdec link-grey" href="./index.html"
+                >Introduction
+              </a>
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./code_input.html"
+                >2. Code Input</a
+              >
+              <ul class="sublist">
+                <li>
+                  2.1<a class="notextdec link-grey" href="#overview">
+                    Overview</a
+                  >
+                </li>
+                <li>
+                  2.2<a class="notextdec link-grey" href="#sign">
+                    Function Signature</a
+                  >
+                </li>
+                <li>
+                  2.3<a class="notextdec link-grey" href="#parameters">
+                    Parameters</a
+                  >
+                </li>
+                <li>
+                  2.4<a class="notextdec link-grey" href="#Return_Value">
+                    Return Value</a
+                  >
+                </li>
+                <li>
+                  2.5<a class="notextdec link-grey" href="#Example_Usage">
+                    Example Usage</a
+                  >
+                </li>
+                <li>
+                  2.6<a class="notextdec link-grey" href="#Data_Type">
+                    Data_Type</a
+                  >
+                </li>
+                <li>
+                  2.7<a class="notextdec link-grey" href="#Conclusion">
+                    Conclusion</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="./pre_installed.html"
+                >Pre-Imported Libraries</a
+              >
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./variable.html"
+                >Variable Definitions
+              </a>
+            </li>
+            <li>
+              <a class="nav-link notextdec link-grey" href="./references.html"
+                >References and Resources</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="http://localhost:5173/"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main id="main-doc">
+        <section class="main-section" id="overview">
+          <header>Overview</header>
+          <article>
+            <p>
+              Filter Troy is designed to allow users to create and share their
+              custom image filters using Python code. To facilitate this, we
+              accept Python code submissions with a specific entry point
+              function. This function will process an image using user-defined
+              parameters and return the processed image. Below is the required
+              structure and explanation of the code input for creating these
+              filters.
+            </p>
+          </article>
+        </section>
+
+        <section class="main-section" id="sign">
+          <header>Function Signature</header>
+          <article>
+            <pre><code>def filter(image: np.ndarray, variables: Dict[str, str]) -> np.ndarray:</code></pre>
+          </article>
+        </section>
+
+        <section class="main-section" id="parameters">
+          <header>Parameters</header>
+          <article>
+            <ul>
+              <li>
+                <b
+                  >Image(<code style="background: #f0f0f0">np.ndarray</code
+                  >):</b
+                >
+                <ul>
+                  <li>
+                    A numpy array representing the image to be processed. The
+                    image will typically be in the form of a multi-dimensional
+                    array where each element represents pixel values.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <b
+                  >Variables(<code style="background: #f0f0f0"
+                    >Dict[str, str]</code
+                  >):</b
+                >
+                <ul>
+                  <li>
+                    A dictionary containing filter parameters. Each key-value
+                    pair represents a variable name and its value. Although
+                    users may enter variables as integers, floats, strings,
+                    etc., all variables are converted to strings before being
+                    passed to this function. It is the responsibility of the
+                    function to appropriately parse these string values back
+                    into their intended data types if necessary.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="main-section" id="Return_Value">
+          <header>Return Value</header>
+          <article>
+            <p>
+              The function must return a numpy array (<code
+                style="background: #f0f0f0"
+                ><b>np.ndarray</b></code
+              >) that represents the processed image. This array should be of
+              the same shape and data type as the input
+              <span style="background: #f0f0f0">image</span> array unless
+              intentionally altered by the filter logic.
+            </p>
+          </article>
+        </section>
+
+        <section class="main-section" id="Example_Usage">
+          <header>Example Usage</header>
+          <article>
+            <p>
+              Here’s an example of a simple filter function that adjusts the
+              brightness of an image. The brightness level is passed as a
+              variable:
+            </p>
+            <pre><code>from typing import Dict
+
+def filter(image: np.ndarray, variables: Dict[str, str]) -> np.ndarray:
+    # Convert the brightness variable from string to integer
+    brightness = int(variables["brightness"])
+
+    # Clip the values to ensure they fall within the byte range
+    return np.clip(image + brightness, 0, 255)</code></pre>
+
+            <p>
+              In this example, the variables dictionary might look like this:
+            </p>
+            <pre><code> {"brightness": "50"}</code></pre>
+          </article>
+        </section>
+
+        <section class="main-section" id="Data_Type">
+          <header>Notes on Data Type Conversion</header>
+          <article>
+            <p>
+              Since all variables are passed as strings regardless of how they
+              are input by the user, it is important for your filter function to
+              handle type conversion safely and effectively. Here are some
+              common scenarios:
+            </p>
+            <ul>
+              <li>
+                Converting to integer:
+                <pre><code>int(variables["var_name"])</code></pre>
+              </li>
+              <li>
+                Converting to float:
+                <pre><code>float(variables["var_name"])</code></pre>
+              </li>
+              <li>
+                Using the value as a string:
+                <pre><code>variables["var_name"]</code></pre>
+              </li>
+            </ul>
+            <p>
+              Always ensure you handle potential errors in conversion
+              <span style="background: #f0f0f0"
+                >(e.g., ValueError when converting an invalid string to a
+                number)</span
+              >.
+            </p>
+          </article>
+        </section>
+        <section class="main-section" id="Conclusion">
+          <header>Conclusion</header>
+          <article>
+            <p>
+              Your custom filter function must adhere to the specified signature
+              and handle the conversion of variables from strings as needed. By
+              doing so, you can implement a wide range of effects and
+              transformations on the images, enhancing the creativity and
+              functionality offered by Filter Troy.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

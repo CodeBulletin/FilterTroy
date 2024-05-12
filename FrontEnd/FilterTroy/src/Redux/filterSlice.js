@@ -302,7 +302,7 @@ const filterSlice = createSlice({
       console.log(action.payload);
       state.loading = false;
       state.filterId = action.payload;
-      state.switch_to_view = true;
+      state.switch_to_view = "view";
     });
     builder.addCase(saveFilter.rejected, (state, action) => {
       state.loading = false;

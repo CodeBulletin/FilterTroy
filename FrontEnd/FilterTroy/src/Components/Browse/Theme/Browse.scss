@@ -1,0 +1,42 @@
+.browse_input {
+  width: 100%; /* Ensures the input expands to the full width of its container */
+  padding: 8px 12px; /* Good padding makes the input easier to interact with */
+  background-color: #fcf5e2; /* Light background for the input */
+  color: black; /* Darker text for better readability */
+  border: 1px solid #eee8d5; /* Subtle border */
+  border-radius: 4px; /* Rounded corners for the input field */
+  outline: none; /* Removes the default focus outline */
+  box-sizing: border-box; /* Ensures the input size includes padding */
+  &:focus {
+    border-color: var(--blue); /* Highlight with Solarized blue on focus */
+    box-shadow: 0 0 8px rgba(38, 139, 210, 0.3); /* Soft glow effect for focus */
+  }
+}
+
+.browse_container {
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+}
+
+.browse_button {
+  background-color: #fdf6e3; /* Base3 */
+  color: #000; /* Base01 */
+  border: 2px solid #eee8d5; /* Base2 */
+  padding: 0.5rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size: 0.938rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #eee8d5; /* Base2 */
+    color: #000; /* Base03 */
+    border-color: #073642; /* Base03 */
+  }
+}

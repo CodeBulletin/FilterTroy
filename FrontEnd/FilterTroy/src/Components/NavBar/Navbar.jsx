@@ -19,7 +19,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="NavbarItems">
-        <Link className="NavbarLink" to="/Filter/New">
+        <Link className="NavbarLink" to="http://localhost:8000/doc/">
           Docs
         </Link>
         <Link className="NavbarLink" to="/Browse">
@@ -30,11 +30,7 @@ const Navbar = () => {
             <Link className="NavbarLink" to="/Filter/New">
               New
             </Link>
-            <Link
-              className="NavbarLink"
-              to="/Profile"
-              onClick={() => dispatch(logout())}
-            >
+            <Link className="NavbarLink" to="/Profile">
               <div className="NavbarProfile">
                 <Avatar.Root className="NavbarProfileImage">
                   <Avatar.Image

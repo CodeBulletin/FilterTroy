@@ -1,0 +1,44 @@
+.profileTabButton {
+  background-color: #fbf1d3;
+  color: #000;
+  border-radius: 0;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 50%;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  &[data-state="active"] {
+    background-color: #fdf6e3;
+    border-bottom: none;
+    border-top: 1px solid black;
+    z-index: 1;
+  }
+  &:hover {
+    background-color: #ede5c1;
+    color: #000;
+  }
+}
+
+.profileLogoutButton {
+  background-color: #fdf6e3; /* Base3 */
+  color: #000; /* Base01 */
+  border: 2px solid #eee8d5; /* Base2 */
+  padding: 0.5rem;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  font-size: 0.938rem;
+  cursor: pointer;
+  &:hover {
+    background-color: #eee8d5; /* Base2 */
+    color: #000; /* Base03 */
+    border-color: #073642; /* Base03 */
+  }
+}

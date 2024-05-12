@@ -9,6 +9,9 @@ import {
   StarIcon,
   StarFilledIcon,
   ExclamationTriangleIcon,
+  PaperPlaneIcon,
+  Cross2Icon,
+  Cross1Icon,
 } from "@radix-ui/react-icons";
 
 import { validate_fn } from "../../Redux/authSlice";
@@ -27,6 +30,7 @@ import {
 import {
   setEditorLocalOrientation,
   setVariablesValue,
+  clearLocalData,
 } from "../../Redux/localSlice";
 
 import { useParams, useLocation } from "react-router-dom";
@@ -37,11 +41,15 @@ import { useNavigate, Link } from "react-router-dom";
 import forkIcon from "../../assets/fork.svg";
 import Spinner from "../Common/spinner";
 import NotFoundPage from "../Common/notfound";
+import Comment from "../Common/Comment";
+
+import axios from "axios";
 
 const Filter = () => {
   const dispatch = useDispatch();
   const jwt = useSelector((state) => state.auth.jwt);
   const auth = useSelector((state) => state.auth);
+  const userImage = useSelector((state) => state.auth.profile_picture);
   const isLogged = useSelector((state) => state.auth.isLogged);
   const filterData = useSelector((state) => state.filter);
   const localInputImage = useSelector(
@@ -79,6 +87,9 @@ const Filter = () => {
     "Fork_" + filterData.filterName
   );
 
+  const [comment, setComment] = React.useState("");
+  const [addComment, setAddComment] = React.useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,7 +99,10 @@ const Filter = () => {
       })
     );
     dispatch(setEditorLocalOrientation(null));
-  }, []);
+    if (mode !== "View" && !jwt) {
+      navigate("/login");
+    }
+  }, [jwt]);
 
   useEffect(() => {
     try {
@@ -107,6 +121,7 @@ const Filter = () => {
     const id = filterData.filterId;
     setCopyModal(false);
     dispatch(clearData());
+    dispatch(clearLocalData());
     if (switch_view === "view") {
       navigate("/filter/" + id + "/");
     } else if (switch_view === "edit") {
@@ -162,7 +177,35 @@ const Filter = () => {
       })
     );
   };
+  const [comments, setComments] = React.useState([]);
 
+  const postComment = () => {
+    const form = new FormData();
+    form.append("comment", comment);
+    form.append("token", jwt);
+    axios
+      .post(`http://localhost:8000/comment/${filterid}/`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        setComment("");
+        setAddComment(false);
+        axios
+          .get(`http://localhost:8000/comment/all/${filterid}/`)
+          .then((res) => {
+            setComments(res.data);
+          });
+      });
+  };
+  useEffect(() => {
+    if (!filterid) return;
+    if (mode !== "View") return;
+    axios.get(`http://localhost:8000/comment/all/${filterid}/`).then((res) => {
+      setComments(res.data);
+    });
+  }, []);
   if (filterData.loading) {
     return (
       <div
@@ -191,21 +234,21 @@ const Filter = () => {
         <div>Login to create a new filter or clone an existing one</div>
       ) : (
         <>
-          <Tabs.Root className="TabRoot2" defaultValue="View">
+          <Tabs.Root className="TabRoot2" defaultValue="Info">
             <Tabs.List aria-label="Filters" className="TabList">
               {mode === "View" && (
                 <>
-                  <Tabs.Trigger value="View" className="TabTrigger">
+                  <Tabs.Trigger value="Info" className="TabTrigger">
                     Info
                   </Tabs.Trigger>
-                  <Tabs.Trigger value="Code" className="TabTrigger">
+                  <Tabs.Trigger value="Comment" className="TabTrigger">
                     Comments
                   </Tabs.Trigger>
                 </>
               )}
             </Tabs.List>
             <div className="filterWindow">
-              <Tabs.Content value="View" className="TabContent">
+              <Tabs.Content value="Info" className="TabContent">
                 <div className="filterDetails">
                   <div className="filterDetailsPanel">
                     {mode === "New" && (
@@ -414,8 +457,123 @@ const Filter = () => {
                   </div>
                 </div>
               </Tabs.Content>
-              <Tabs.Content value="Comment" className="TabContent">
-                <></>
+              <Tabs.Content value="Comment" className="TabContent TabLimit">
+                <div className="commentViewPort">
+                  {addComment && jwt && (
+                    <div className="commentInput">
+                      <textarea
+                        placeholder="Add a comment"
+                        onChange={(e) => {
+                          if (e.target.value.length > 250) return;
+                          setComment(e.target.value);
+                        }}
+                        value={comment}
+                        style={{
+                          width: "100%",
+                          height: "110px",
+                          padding: "10px",
+                          boxSizing: "border-box",
+                          borderRadius: "10px",
+                          border: "none",
+                          marginBottom: "10px",
+                        }}
+                      ></textarea>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <span>
+                          {comment.length} / 250
+                          {comment.length === 250 && (
+                            <span style={{ color: "red" }}> (Max)</span>
+                          )}
+                        </span>
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "10px",
+                            alignItems: "center",
+                          }}
+                        >
+                          <button
+                            onClick={() => {
+                              setComment("");
+                              setAddComment(false);
+                            }}
+                            style={{
+                              backgroundColor: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                              display: "flex",
+                            }}
+                          >
+                            <Cross1Icon />
+                          </button>
+                          <button
+                            style={{
+                              backgroundColor: "transparent",
+                              border: "none",
+                              cursor: "pointer",
+                              display: "flex",
+                            }}
+                            onClick={postComment}
+                          >
+                            <PaperPlaneIcon />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {!addComment && jwt && (
+                    <button
+                      onClick={() => setAddComment(true)}
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                        display: "flex",
+                        marginBottom: "10px",
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "10px",
+                        alignItems: "center",
+                      }}
+                    >
+                      <span>Add Comment</span>
+                      <PaperPlaneIcon />
+                    </button>
+                  )}
+                  <div
+                    style={{
+                      flexGrow: 1,
+                      flexBasis: 0,
+                      minHeight: 0,
+                      overflowY: "auto",
+                    }}
+                    className="hide-scrollbar"
+                  >
+                    <div
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      {comments.map((comment, index) => (
+                        <Comment
+                          key={index}
+                          comment={comment.Comment}
+                          comment_id={comment.CommentID}
+                          UserName={comment.UserName}
+                          On={comment.CreatedOn}
+                          UserPic={comment.ProfilePicPath}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </Tabs.Content>
             </div>
           </Tabs.Root>

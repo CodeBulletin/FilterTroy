@@ -3,8 +3,10 @@ import Filter from "./Components/FilterPage/Filter";
 import Navbar from "./Components/NavBar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import Login from "./Components/Login-signUp/LoginSignup";
-import DialogCard from "./Components/Common/Dialog";
 import Browse from "./Components/Browse/Browse";
+import NotFoundPage from "./Components/Common/notfound";
+import Profile from "./Components/Profile/Profile";
+import HomePage from "./Components/HomePage/HomePage";
 import NotFoundPage from "./Components/Common/notfound";
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/browse" element={<Browse />} />
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

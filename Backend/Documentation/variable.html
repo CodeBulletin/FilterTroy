@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Include highlight.js from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <title>FilterTroy Documentation</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div>
+        <div id="open-nav-btn" class="ham-nav-arrow-btn show">
+          <i class="far fa-arrow-alt-circle-right arrow"></i>
+        </div>
+        <div id="close-nav-btn" class="ham-nav-arrow-btn hide">
+          <i class="far fa-arrow-alt-circle-left arrow"></i>
+        </div>
+      </div>
+      <div class="navigation">
+        <nav id="navbar">
+          <header id="navbar-header">
+            <div>
+              <span>FilterTroy</span>
+            </div>
+          </header>
+          <ul class="nav-list nobullets">
+            <li>
+              <a class="nav-link notextdec link-grey" href="./index.html"
+                >Introduction
+              </a>
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./code_input.html"
+                >Code Input</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="./pre_installed.html"
+                >Pre-Imported Libraries</a
+              >
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./variable.html"
+                >4. Variable Definitions
+              </a>
+              <ul class="sublist">
+                <li>
+                  4.1<a class="notextdec link-grey" href="#overview">
+                    Overview</a
+                  >
+                </li>
+                <li>
+                  4.2<a
+                    class="notextdec link-grey"
+                    href="#Variable_Definition_Structure"
+                  >
+                    Variable Definition Structure</a
+                  >
+                </li>
+                <li>
+                  4.3<a
+                    class="notextdec link-grey"
+                    href="#Example_JSON_Definition"
+                  >
+                    Example JSON Definition</a
+                  >
+                </li>
+                <li>
+                  4.4<a class="notextdec link-grey" href="#Usage_Notes">
+                    Usage Notes</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link notextdec link-grey" href="./references.html"
+                >References and Resources</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="http://localhost:5173/"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main id="main-doc">
+        <section class="main-section" id="overview">
+          <header>Overview</header>
+          <article>
+            <p>
+              Filter Troy allows filter creators to define variables that users
+              can adjust to modify how the filter processes images. These
+              variables are defined using a JSON structure, enabling a flexible
+              and user-friendly way to specify input controls such as sliders,
+              text fields, selection menus, and checkboxes. Below, we provide
+              details on how to define each type of input.
+            </p>
+          </article>
+        </section>
+
+        <section class="main-section" id="Variable_Definition_Structure">
+          <header>Variable Definition Structure</header>
+          <article>
+            <p>
+              Each variable in the filter configuration is defined as a JSON
+              object with properties that describe the type of input and its
+              default settings. Here is a breakdown of the input types and their
+              respective properties:
+            </p>
+            <ol>
+              <li>
+                <b>Slider</b>
+                <ul>
+                  <li><b>type: </b>“slider"</li>
+                  <li><b>min: </b>The minimum value of the slider.</li>
+                  <li><b>max: </b>The maximum value of the slider.</li>
+                  <li>
+                    <b>step:</b>The smallest increment by which the slider can
+                    adjust the value.
+                  </li>
+                  <li>
+                    <b>value: </b>The default value set when the filter is first
+                    loaded.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Text</b>
+                <ul>
+                  <li><b>type: </b>“text”</li>
+                  <li>
+                    <b>dtype: </b>Specifies whether the text input is treated as
+                    plain “text” or a “number”.
+                  </li>
+                  <li>
+                    <b>value: </b>The default text or number present in the text
+                    field.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <b>Numbers</b>
+                <ul>
+                  <li>
+                    <b>type: </b>“text” (with
+                    <span style="background: #f0f0f0">"dtype": "number"</span>)
+                  </li>
+                  <li><b>value: </b>The default numerical value.</li>
+                </ul>
+              </li>
+
+              <li>
+                <b>Color</b>
+                <ul>
+                  <li><b>type: </b>“color”</li>
+                  <li>
+                    <b>value: </b>The default color value, represented as a hex
+                    code (e.g., “#FF0000”).
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <b>Select</b>
+                <ul>
+                  <li><b>type: </b>“select”</li>
+                  <li>
+                    <b>options: </b>An array of objects where each object has a
+                    <span>"value" </span>key for the data value and a
+                    <span style="background: #f0f0f0">"label"</span> key for the
+                    display label.
+                  </li>
+                  <li><b>value: </b>The default selected value.</li>
+                </ul>
+              </li>
+
+              <li>
+                <b>Checkbox</b>
+                <ul>
+                  <li><b>type: </b>“checkbox”</li>
+                  <li>
+                    <b>value: </b>A boolean that represents whether the checkbox
+                    is checked
+                    <span style="background: #f0f0f0">(true)</span> or unchecked
+                    <span style="background: #f0f0f0">(false)</span>.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="main-section" id="Example_JSON_Definition">
+          <header>Example JSON Definition</header>
+          <article>
+            <pre><code class="python">{
+    "brightness": {
+        "type": "slider",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "value": 50
+    },
+    "caption": {
+        "type": "text",
+        "dtype": "text",
+        "value": "Enter caption"
+    },
+    "scale": {
+        "type": "text",
+        "dtype": "number",
+        "value": 1
+    },
+    "background_color": {
+        "type": "color",
+        "value": "#FFFFFF"
+    },
+    "effect_type": {
+        "type": "select",
+        "options": [
+            {
+                "value": "blur", 
+                "label": "Blur"
+            },
+            {
+                "value": "sharpen", 
+                "label": "Sharpen"
+            }
+        ],
+        "value": "blur"
+    },
+    "invert_colors": {
+        "type": "checkbox",
+        "value": false
+    }
+}</code></pre>
+          </article>
+        </section>
+
+        <section class="main-section" id="Usage_Notes">
+          <header>Usage Notes</header>
+          <article>
+            <ul>
+              <li>
+                Ensure that the default values provided in the JSON
+                configuration are valid and meaningful for the filter’s
+                operation.
+              </li>
+              <li>
+                For <span style="background: #f0f0f0">select</span> inputs,
+                ensure that the
+                <span style="background: #f0f0f0">value</span> specified in the
+                default setting matches one of the options’ values.
+              </li>
+              <li>
+                Handle parsing and error checking in your filter function to
+                accommodate the string-to-type conversion for inputs that are
+                not inherently string-based (e.g., numbers, booleans).
+              </li>
+            </ul>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

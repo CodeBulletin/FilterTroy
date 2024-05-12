@@ -13,20 +13,6 @@ import os
 
 router = APIRouter()
 
-@router.get("/InputImages/{image_path}")
-def get_input_image(image_path: str):
-    if os.path.isfile(f"./Images/InputImages/{image_path}") is False:
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(f"./Images/InputImages/{image_path}", media_type="image/png")
-
-@router.get("/OutputImages/{image_path}")
-def get_output_image(image_path: str):
-    if os.path.isfile(f"./Images/InputImages/{image_path}") is False:
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(f"./Images/OutputImages/{image_path}", media_type="image/png")
-
 @router.get("/{filter_id}")
 def filter_details(filter_id: str):
     conn = connection()

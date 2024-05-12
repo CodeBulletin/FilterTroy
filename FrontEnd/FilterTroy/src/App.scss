@@ -23,3 +23,18 @@
   --cyan: #2aa198;
   --green: #859900;
 }
+
+textarea {
+  resize: none;
+}
+
+.hide-scrollbar {
+  // Hides scrollbar for Internet Explorer, Edge, and Firefox
+  -ms-overflow-style: none; // for Internet Explorer and Edge
+  scrollbar-width: none; // for Firefox
+
+  // Hides scrollbar for Chrome, Safari, and Opera
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

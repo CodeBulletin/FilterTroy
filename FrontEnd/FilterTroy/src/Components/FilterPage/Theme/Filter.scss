@@ -23,8 +23,10 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
+  border-top-left-radius: 0px;
   padding: 1rem;
   box-sizing: border-box;
+
   .inputView {
     display: flex;
     flex-direction: column;
@@ -223,4 +225,44 @@
       color: #dc322f !important;
     }
   }
+}
+
+.commentViewPort {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #fbf1d3;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentInput {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 10px 0;
+  background-color: #fcf5e2;
+  textarea {
+    outline: none;
+    box-sizing: border-box;
+    &:focus {
+      outline: 1px solid #fc8020 !important;
+    }
+    &:active {
+      outline: 1px solid #fc8020 !important;
+    }
+  }
+}
+
+.TabLimit {
+  flex-grow: 1;
+  flex-basis: 0;
+  min-height: 0;
+  overflow: auto;
 }

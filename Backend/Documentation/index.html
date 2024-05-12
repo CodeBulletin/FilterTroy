@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.13.0/css/all.css"
+      integrity="sha384-Bfad6CLCknfcloXFOyFnlgtENryhrpZCe29RTifKEixXQZ38WheV+i/6YWSzkz3V"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" />
+
+    <!-- Include highlight.js from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+    <title>FilterTroy Documentation</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div>
+        <div id="open-nav-btn" class="ham-nav-arrow-btn show">
+          <i class="far fa-arrow-alt-circle-right arrow"></i>
+        </div>
+        <div id="close-nav-btn" class="ham-nav-arrow-btn hide">
+          <i class="far fa-arrow-alt-circle-left arrow"></i>
+        </div>
+      </div>
+      <div class="navigation">
+        <nav id="navbar">
+          <header id="navbar-header">
+            <div>
+              <span>FilterTroy</span>
+            </div>
+          </header>
+          <ul class="nav-list nobullets">
+            <li>
+              <a class="nav-link notextdec link-grey" href="#Introduction"
+                >1. Introduction
+              </a>
+              <ul class="sublist">
+                <li>
+                  1.1<a class="notextdec link-grey" href="#Features">
+                    Features</a
+                  >
+                </li>
+                <li>
+                  1.2<a class="notextdec link-grey" href="#Getting_Started">
+                    Getting Started with Filter Troy</a
+                  >
+                </li>
+                <li>
+                  1.3<a class="notextdec link-grey" href="#login">
+                    Advanced Features</a
+                  >
+                </li>
+                <li>
+                  1.4<a class="notextdec link-grey" href="#how_login">
+                    How to Log In</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./code_input.html"
+                >Code Input</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="./pre_installed.html"
+                >Pre-Imported Libraries</a
+              >
+            </li>
+
+            <li>
+              <a class="nav-link notextdec link-grey" href="./variable.html"
+                >Variable Definitions</a
+              >
+            </li>
+            <li>
+              <a class="nav-link notextdec link-grey" href="./references.html"
+                >References and Resources</a
+              >
+            </li>
+            <li>
+              <a
+                class="nav-link notextdec link-grey"
+                href="http://localhost:5173/"
+                >Home</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <main id="main-doc">
+        <section class="main-section" id="Introduction">
+          <header>Introduction</header>
+          <article>
+            <p>
+              Filter Troy is an innovative platform designed to empower both
+              novice and expert users to explore and apply image processing
+              techniques through user-generated filters. The platform offers a
+              wide range of filters that can be applied to images to achieve
+              various effects, from basic color adjustments to complex
+              transformations.
+            </p>
+          </article>
+        </section>
+        <section class="main-section" id="Features">
+          <header>Features</header>
+          <article>
+            <ul>
+              <li>
+                <b>Browse Filters:</b> Users can explore a diverse library of
+                filters created by the Filter Troy community.
+              </li>
+              <li>
+                <b> Filters:</b> Select a filter and upload an image to see the
+                effect instantly.
+              </li>
+              <li>
+                <b>Interactive Customization:</b> Adjust filter parameters using
+                intuitive controls like sliders, color pickers, and checkboxes
+                to customize the effect on your image.
+              </li>
+            </ul>
+          </article>
+        </section>
+
+        <section class="main-section" id="Getting_Started">
+          <header>Getting Started with Filter Troy</header>
+          <span style="color: black; font-weight: 600"
+            >Browsing and Applying Filters:
+          </span>
+          <article>
+            <ol>
+              <li>
+                <b>Accessing the Platform:</b>
+                <ul>
+                  <li>
+                    Visit the Filter Troy website. No login is required to
+                    browse or apply filters.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Exploring Filters:</b>
+                <ul>
+                  <li>
+                    Browse through an extensive collection of filters on the
+                    homepage or use the search functionality to find specific
+                    types of filters.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Applying Filters:</b>
+                <ul>
+                  <li>Click on a filter to view its details.</li>
+                  <li>
+                    Upload an image from your device to apply the filter. You
+                    can adjust the effect using the provided controls, which
+                    vary depending on the filter’s configuration.
+                  </li>
+                  <li>Preview the changes in real-time.</li>
+                </ul>
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="main-section" id="login">
+          <header>Advanced Features (Login Required)</header>
+          <article>
+            <p>
+              To engage with the community and access advanced features, users
+              need to log in. Here’s what you can do once logged in:
+            </p>
+            <ol>
+              <li>
+                <b>Creating Filters:</b>
+                <ul>
+                  <li>
+                    Create your own filters using the provided template. You can
+                    define custom variables and write the Python code that will
+                    process the images.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Editing and Forking Filters:</b>
+                <ul>
+                  <li>
+                    You can edit filters you’ve created or fork existing filters
+                    to modify and make them your own.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Community Engagement:</b>
+                <ul>
+                  <li>
+                    Leave likes or stars on filters you find impressive or
+                    useful.
+                  </li>
+                  <li>
+                    Comment on filters to provide feedback or ask questions.
+                  </li>
+                  <li>
+                    to comments to engage in discussions with other users.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+          </article>
+        </section>
+
+        <section class="main-section" id="how_login">
+          <header>How to Log In</header>
+          <article>
+            <ol>
+              <li>
+                <b>Navigate to the Login Page:</b>
+                <ul>
+                  <li>
+                    Click the “Login” button available on the top navigation
+                    bar.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <b>Enter Credentials:</b>
+                <ul>
+                  <li>
+                    If you already have an account, enter your username and
+                    password.
+                  </li>
+                  <li>
+                    New users can sign up by following the link to the
+                    registration form.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+            <p>
+              By logging in, you unlock the full potential of Filter Troy,
+              enabling you to contribute to the community and personalize your
+              experience. Whether you’re applying filters to your images or
+              creating new ones, Filter Troy provides a robust platform to
+              enhance your digital creativity.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
