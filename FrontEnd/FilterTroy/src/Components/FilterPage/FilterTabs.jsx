@@ -14,7 +14,6 @@ const FilterTabs = ({ mode, handleApply }) => {
   const fontSize = useSelector((state) => state.local.editorFontSize);
   const consoleError = useSelector((state) => state.filter.consoleError);
   const dispatch = useDispatch();
-
   return (
     <Tabs.Root className="TabRoot" defaultValue="View">
       <Tabs.List aria-label="Filters" className="TabList">

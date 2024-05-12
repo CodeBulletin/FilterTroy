@@ -7,6 +7,7 @@ import Browse from "./Components/Browse/Browse";
 import NotFoundPage from "./Components/Common/notfound";
 import Profile from "./Components/Profile/Profile";
 import HomePage from "./Components/HomePage/HomePage";
+import NotFoundPage from "./Components/Common/notfound";
 
 function App() {
   return (

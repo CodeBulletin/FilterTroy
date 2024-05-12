@@ -10,7 +10,6 @@ from Database.filterdb import isLiked as isLikeddb, isSaved as isSaveddb, toggle
 from Database.filterdb import getAllFilterIDs as getAllFilterIDsdb, doesFilterExistAtAll, is_owned_by, edit_filter, isForked as isForkeddb
 from utils import generateID, getRandAlphaStr, base64_to_image_png, copy_file_if_exists, load_as_base64
 import os
-import time
 
 router = APIRouter()
 
@@ -34,8 +33,6 @@ def filter_details(filter_id: str):
     
     if res is None:
         raise HTTPException(status_code=404, detail="Filter not found")
-    
-    time.sleep(0.1)
     
     return res
 

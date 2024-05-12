@@ -177,7 +177,6 @@ const Filter = () => {
       })
     );
   };
-
   const [comments, setComments] = React.useState([]);
 
   const postComment = () => {
@@ -207,7 +206,6 @@ const Filter = () => {
       setComments(res.data);
     });
   }, []);
-
   if (filterData.loading) {
     return (
       <div
