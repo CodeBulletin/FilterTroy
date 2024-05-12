@@ -30,11 +30,7 @@ const Navbar = () => {
             <Link className="NavbarLink" to="/Filter/New">
               New
             </Link>
-            <Link
-              className="NavbarLink"
-              to="/Profile"
-              onClick={() => dispatch(logout())}
-            >
+            <Link className="NavbarLink" to="/Profile">
               <div className="NavbarProfile">
                 <Avatar.Root className="NavbarProfileImage">
                   <Avatar.Image

@@ -4,6 +4,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from evaluate_filter import evaluate_filter
 from auth.auth import router as auth_router
 from filter.filter import router as filter_router
+from browse.browse import router as browse_router
+from comment.comment import router as comment_router
 import os
 import cv2
 import base64
@@ -35,8 +37,8 @@ print("Folders created / already exist")
 
 app.include_router(auth_router, prefix="/auth")
 app.include_router(filter_router, prefix="/filter")
-
-import time
+app.include_router(browse_router, prefix="/browse")
+app.include_router(comment_router, prefix="/comment")
 
 @app.post("/apply")
 async def apply_filter(code: str = Form(...), vars: str = Form(...), image: str = Form()):
@@ -61,26 +63,5 @@ async def apply_filter(code: str = Form(...), vars: str = Form(...), image: str 
     _, img_encoded = cv2.imencode(".jpg", evaluated)
 
     img_base64 = base64.b64encode(img_encoded).decode()
-
-    time.sleep(1)
     
     return "data:image/jpeg;base64," + img_base64
-    # content = await image.read()
-    # # write the content to a file
-    # with open("data.jpg", "wb") as f:
-    #     f.write(content)
-
-    # # read the image
-    # img = cv2.imread("data.jpg")
-
-    # #convert the vars to a dict
-    # variables = json.loads(vars)
-
-    # evaluated = evaluate_filter(code, img, variables)
-
-    # _, img_encoded = cv2.imencode(".jpg", evaluated)
-
-    # img_base64 = base64.b64encode(img_encoded).decode()
-    # img = f"data:image/jpeg;base64,{img_base64}"
-
-    # return img

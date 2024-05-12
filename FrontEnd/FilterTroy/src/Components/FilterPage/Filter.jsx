@@ -27,6 +27,7 @@ import {
 import {
   setEditorLocalOrientation,
   setVariablesValue,
+  clearLocalData,
 } from "../../Redux/localSlice";
 
 import { useParams, useLocation } from "react-router-dom";
@@ -88,7 +89,10 @@ const Filter = () => {
       })
     );
     dispatch(setEditorLocalOrientation(null));
-  }, []);
+    if (!jwt) {
+      navigate("/login");
+    }
+  }, [jwt]);
 
   useEffect(() => {
     try {
@@ -107,6 +111,7 @@ const Filter = () => {
     const id = filterData.filterId;
     setCopyModal(false);
     dispatch(clearData());
+    dispatch(clearLocalData());
     if (switch_view === "view") {
       navigate("/filter/" + id + "/");
     } else if (switch_view === "edit") {
@@ -191,21 +196,21 @@ const Filter = () => {
         <div>Login to create a new filter or clone an existing one</div>
       ) : (
         <>
-          <Tabs.Root className="TabRoot2" defaultValue="View">
+          <Tabs.Root className="TabRoot2" defaultValue="Info">
             <Tabs.List aria-label="Filters" className="TabList">
               {mode === "View" && (
                 <>
-                  <Tabs.Trigger value="View" className="TabTrigger">
+                  <Tabs.Trigger value="Info" className="TabTrigger">
                     Info
                   </Tabs.Trigger>
-                  <Tabs.Trigger value="Code" className="TabTrigger">
+                  <Tabs.Trigger value="Comment" className="TabTrigger">
                     Comments
                   </Tabs.Trigger>
                 </>
               )}
             </Tabs.List>
             <div className="filterWindow">
-              <Tabs.Content value="View" className="TabContent">
+              <Tabs.Content value="Info" className="TabContent">
                 <div className="filterDetails">
                   <div className="filterDetailsPanel">
                     {mode === "New" && (
@@ -415,7 +420,7 @@ const Filter = () => {
                 </div>
               </Tabs.Content>
               <Tabs.Content value="Comment" className="TabContent">
-                <></>
+                <div className="commentViewPort"></div>
               </Tabs.Content>
             </div>
           </Tabs.Root>

@@ -23,8 +23,10 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
+  border-top-left-radius: 0px;
   padding: 1rem;
   box-sizing: border-box;
+
   .inputView {
     display: flex;
     flex-direction: column;
@@ -223,4 +225,15 @@
       color: #dc322f !important;
     }
   }
+}
+
+.commentViewPort {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #fbf1d3;
+  padding: 1rem;
+  box-sizing: border-box;
 }

@@ -26,6 +26,11 @@ const localSliceNoPresist = createSlice({
   name: "local_data",
   initialState: initState_np,
   reducers: {
+    clearLocalData: (state) => {
+      for (const key in state) {
+        state[key] = initState_np[key];
+      }
+    },
     setEditorLocalOrientation: (state, action) => {
       state.editorLocalOrientation = action.payload;
     },
@@ -51,6 +56,7 @@ export const {
   setFilterCloneId,
   setInputImage,
   setOutputImage,
+  clearLocalData,
 } = localSliceNoPresist.actions;
 
 export const { setEditorFontSize } = localSlice.actions;

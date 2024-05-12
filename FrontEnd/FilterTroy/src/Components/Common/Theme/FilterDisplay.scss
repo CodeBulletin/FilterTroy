@@ -1,0 +1,114 @@
+.FilterDisplay__slider {
+  // make slider bar invisible
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: #00000000;
+}
+
+.FilterDisplay__slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none; /* Remove default styling */
+  background: none; /* Make the track transparent */
+  border: none;
+  color: transparent;
+  clip-path: inset(0 0 0 0); /* Hide the track */
+}
+
+/* Styling the Thumb of the Slider for WebKit browsers */
+.FilterDisplay__slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  width: 10px; /* Width of the thumb */
+  height: 30px; /* Height of the thumb */
+  background: #fc8020; /* Solarized blue color */
+  cursor: grab; /* Cursor on hover */
+  border: none;
+  position: relative; /* Needed to position the lines inside */
+  margin-left: -2px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: #fbf1d3 2px solid;
+  //  on grab set the cursor to grabbing
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+/* Styling for Firefox */
+.FilterDisplay__slider::-moz-range-track {
+  background: transparent; /* Make the track transparent */
+}
+
+.FilterDisplay__slider::-moz-range-thumb {
+  appearance: none;
+  width: 10px; /* Width of the thumb */
+  height: 30px; /* Height of the thumb */
+  background: #fc8020; /* Solarized blue color */
+  cursor: grab; /* Cursor on hover */
+  border: none;
+  position: relative; /* Needed to position the lines inside */
+  margin-left: -2px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: #fbf1d3 2px solid;
+  //  on grab set the cursor to grabbing
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.FilterDisplay__info {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  .FilterDisplay__info__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    h1 {
+      font-weight: 600;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .FilterDisplay__info__description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .FilterDisplay__info__description__left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .FilterDisplay__info__description__left__item {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+    .FilterDisplay__info__description__right {
+      display: flex;
+      align-items: center;
+      span {
+        font-size: 0.75rem;
+
+        .link {
+          color: #fc8020;
+          text-decoration: none;
+          &:visited {
+            color: #fc8020;
+          }
+          &:hover {
+            color: #cc8890;
+          }
+        }
+      }
+    }
+  }
+}

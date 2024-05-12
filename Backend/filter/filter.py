@@ -10,22 +10,9 @@ from Database.filterdb import isLiked as isLikeddb, isSaved as isSaveddb, toggle
 from Database.filterdb import getAllFilterIDs as getAllFilterIDsdb, doesFilterExistAtAll, is_owned_by, edit_filter, isForked as isForkeddb
 from utils import generateID, getRandAlphaStr, base64_to_image_png, copy_file_if_exists, load_as_base64
 import os
+import time
 
 router = APIRouter()
-
-@router.get("/InputImages/{image_path}")
-def get_input_image(image_path: str):
-    if os.path.isfile(f"./Images/InputImages/{image_path}") is False:
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(f"./Images/InputImages/{image_path}", media_type="image/png")
-
-@router.get("/OutputImages/{image_path}")
-def get_output_image(image_path: str):
-    if os.path.isfile(f"./Images/InputImages/{image_path}") is False:
-        raise HTTPException(status_code=404, detail="Image not found")
-
-    return FileResponse(f"./Images/OutputImages/{image_path}", media_type="image/png")
 
 @router.get("/{filter_id}")
 def filter_details(filter_id: str):
@@ -47,6 +34,8 @@ def filter_details(filter_id: str):
     
     if res is None:
         raise HTTPException(status_code=404, detail="Filter not found")
+    
+    time.sleep(0.1)
     
     return res
 
