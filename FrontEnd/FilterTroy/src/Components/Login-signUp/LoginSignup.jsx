@@ -97,7 +97,9 @@ const LoginSignup = () => {
         <div className="header">
           <div className="text">Login</div>
           <div className="underline"></div>
-          {error && <div className="error">{error}</div>}
+          {error && error !== "Invalid token" && (
+            <div className="error">{error}</div>
+          )}
         </div>
         <div className="input">
           <PersonIcon className="LoginIcon" />
@@ -124,7 +126,9 @@ const LoginSignup = () => {
         <div className="header">
           <div className="text">Sign Up</div>
           <div className="underline"></div>
-          {error && <div className="error">{error}</div>}
+          {error && error !== "Invalid token" && (
+            <div className="error">{error}</div>
+          )}
         </div>
 
         <div className="input">

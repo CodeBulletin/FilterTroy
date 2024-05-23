@@ -538,7 +538,6 @@ const Filter = () => {
                         cursor: "pointer",
                         display: "flex",
                         marginBottom: "10px",
-                        display: "flex",
                         justifyContent: "center",
                         gap: "10px",
                         alignItems: "center",
